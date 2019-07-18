@@ -206,7 +206,7 @@ module.exports = {
 
       case this.tok.T_COMMENT:
         return this.read_comment();
-
+        
       case this.tok.T_DOC_COMMENT:
         return this.read_doc_comment();
 

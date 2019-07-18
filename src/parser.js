@@ -289,7 +289,10 @@ parser.prototype.parse = function(code, filename) {
     this.lexer.yylloc.last_column,
     this.lexer.offset
   ];
-  const result = program(childs, this._errors, this._docs, this._tokens);
+  // node() => return this.ast.prepare(name, null, this);
+  // AST.prototype.prepare = function(kind, docs, parser)
+  const result = program(childs, this._errors, this._docs, this._tokens); // final output of AST
+  // console.log(util.inspect(result, { depth: null }));
   if (this.debug) {
     const errors = this.ast.checkNodes();
     if (errors.length > 0) {
