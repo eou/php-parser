@@ -5,6 +5,8 @@
  */
 "use strict";
 
+const Position = require("../ast/position");
+
 module.exports = {
   read_expr: function(expr) {
     const result = this.node();
@@ -351,24 +353,32 @@ module.exports = {
       switch (this.token) {
         case "=": {
           if (isConst) this.error("VARIABLE");
+          let op = {}, prev = this.next().prev;
+          op.loc = new Position(prev[0], prev[1], prev[2]) 
           let right;
-          if (this.next().token == "&") {
+          if (this.token == "&") {
             if (this.next().token === this.tok.T_NEW) {
               right = this.read_new_expr();
             } else {
               right = this.read_variable(false, false, true);
             }
           } else {
+            // console.log(this.prev);  // get = position
+
             right = this.read_expr();
           }
           // create assign ast node
-          return result("assign", expr, right, "=");
+          op.sign = "=";
+          let x = result("assign", expr, right, op);
+          console.log(x)
+          return x;
         }
 
         // operations :
-        case this.tok.T_PLUS_EQUAL:
+        case this.tok.T_PLUS_EQUAL: {
           if (isConst) this.error("VARIABLE");
           return result("assign", expr, this.next().read_expr(), "+=");
+        }
 
         case this.tok.T_MINUS_EQUAL:
           if (isConst) this.error("VARIABLE");

@@ -1,6 +1,4 @@
 <?php
 
-foreach (   $tips  as   $i   =>    $tip)    {
-    echo "Tip $i: " . $tip;
-}
+   $a  =  1234567;
 ?>

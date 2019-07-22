@@ -545,6 +545,8 @@ parser.prototype.next = function() {
 
   // you can get every token's exact position here
   // console.log(this.prev);
+  // you can get every token's content here
+  // console.log(this.text());
 
   // eating the token
   this.lex();

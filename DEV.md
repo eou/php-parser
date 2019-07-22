@@ -5,12 +5,13 @@
 - `lexer.js` tokenizes the string for helping the parser to build the AST from its grammar.
 - `parser.js` builds the AST tree from the lexer.
 - `ast.js` provides the visualization of the AST structure (You can see the AST as a DOM document). 
+  - `/src/ast/node.js` defines generic AST node type.
 
 ---
 
 `/index.d.ts` defines all API type of `php-parser`. (The "d.ts" file is used to provide typescript type information about an API that's written in JavaScript. )
 
-`src/index.js` is the entrance of the `php-parser`.
+`/src/index.js` is the entrance of the `php-parser`.
 ```javascript
 var engine = require("../src/index");
 var parser = new engine({
@@ -186,6 +187,8 @@ parser.prototype.next = function() {
 
   // you can get every token's exact position here
   console.log(this.prev);
+  // you can get every token's content
+  console.log(this.text());
 
   // eating the token
   this.lex();
@@ -214,8 +217,5 @@ parser.prototype.next = function() {
 };
 ```
 
-The `this.prev` provides each token's row, column and offset. We need to correspond these tokens to each part of final AST output, especially for operators. The operators' locations are not in the final AST.
-
-
-
+The `this.prev` array provides each token's row, column and offset. We need to correspond these tokens to each part of final AST output, especially for operators. The operators' locations are not recorded in the final AST.
 

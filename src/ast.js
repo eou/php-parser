@@ -379,7 +379,7 @@ AST.prototype.prepare = function(kind, docs, parser) {
       kind = args.shift();
     }
     // build the object
-    const node = self[kind];
+    const node = self[kind];  // extends from ast submodules
     if (typeof node !== "function") {
       throw new Error('Undefined node "' + kind + '"');
     }
