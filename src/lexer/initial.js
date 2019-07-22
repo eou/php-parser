@@ -22,7 +22,7 @@ module.exports = {
     while (this.offset < this.size) {
       let ch = this.input();
       if (ch == "<") {
-        ch = this.ahead(1);
+        ch = this.ahead(1); // lexer.prototype.ahead = function(size) { ... }, look ahead, defined in `lexer.js`
         if (ch == "?") {
           if (this.tryMatch("?=")) {
             this.unput(1)

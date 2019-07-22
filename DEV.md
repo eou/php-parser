@@ -1,5 +1,7 @@
 # Development Notes
 
+## Structure
+
 - `lexer.js` tokenizes the string for helping the parser to build the AST from its grammar.
 - `parser.js` builds the AST tree from the lexer.
 - `ast.js` provides the visualization of the AST structure (You can see the AST as a DOM document). 
@@ -61,7 +63,159 @@ parser.prototype.parse = function(code, filename) {
   // ...
 }
 ```
+The `next()` consumes next token of source code.
 The `read_start()` defines in `src/parser/main.js`. It returns every current top statement.
 
 ---
+
+## Parsing Example
+
+```php
+<?php
+  $a = 10;
+?>
+```
+
+1. `var engine = require("../src/index");` 
+2. `var parser = new engine({});`
+3. `parser.parseCode(phpFile);`
+4. `index.js`: `engine.prototype.parseCode = function(buffer, filename) {...return this.parser.parse(buffer, filename);};`
+5. `parser.js`: `parser.prototype.parse = function(code, filename) {... this.next(); ... while(...) { const node = this.read_start();... }}`
+6. `parser.js`: `parser.prototype.next = function() {}`
+7. `parser/main.js`:
+    ```javascript
+    read_start: function() {
+      if (this.token == this.tok.T_NAMESPACE) {
+        return this.read_namespace();   // /parser/namespace.js
+      } else {
+        return this.read_top_statement();   // /parser/statement.js
+      }
+    }
+    ```
+8. `parser/statement.js`: 
+    ```javascript
+    read_top_statement: function() {
+      switch (this.token) {
+        // ...
+        default:
+          return this.read_statement();   // normal statement
+      }
+    }
+    ```
+9. `parser/statement.js`:
+    ```javascript
+    read_statement: function() {
+      switch (this.token) {
+        // ...
+        default: {
+          // default fallback expr
+          const statement = this.node("expressionstatement");
+          const expr = this.read_expr();    // read expression
+          this.expectEndOfStatement(expr);
+          return statement(expr);
+        }
+      }
+    },
+    ```
+10. `parser/expr.js`:
+    ```javascript
+    read_expr: function(expr) {
+      const result = this.node();
+      if (!expr) {
+        expr = this.read_expr_item();
+      }
+      // ...
+    }
+    ```
+11. `parser/expr.js`:
+    ```javascript
+    read_expr_item: function() {
+      // ...
+      if (this.is("VARIABLE")) {
+        result = this.node();   // prepare ast node
+        expr = this.read_variable(false, false, false);   // get the variable such as $a then move to next token
+        const isConst =
+          expr.kind === "identifier" ||
+          (expr.kind === "staticlookup" && expr.offset.kind === "identifier");
+
+        // VARIABLES SPECIFIC OPERATIONS
+        switch (this.token) {
+          case "=": {
+            if (isConst) this.error("VARIABLE");
+            let right;
+            if (this.next().token == "&") {
+              if (this.next().token === this.tok.T_NEW) {
+                right = this.read_new_expr();
+              } else {
+                right = this.read_variable(false, false, true);
+              }
+            } else {
+              right = this.read_expr();   // read the right part of expression
+            }
+            // create assign ast node
+            return result("assign", expr, right, "=");
+          }
+        }
+
+        // ...
+      }
+    }
+    ```
+
+---
+
+## Unparse
+
+We need to get all white spaces before each token to determine the exact position of each token.
+
+But currently the `php-parser` does not provide an API which can tell us the exact white spaces before each token. And the API which helps is the `lexer.yylloc`.
+
+From `parser.js/next()`:
+```javascript
+parser.prototype.next = function() {
+  // prepare the back command
+  if (this.token !== ";" || this.lexer.yytext === ";") {
+    // ignore '?>' from automated resolution
+    // https://github.com/glayzzle/php-parser/issues/168
+    this.prev = [
+      this.lexer.yylloc.last_line,  
+      this.lexer.yylloc.last_column,
+      this.lexer.offset
+    ];
+  }
+
+  // you can get every token's exact position here
+  console.log(this.prev);
+
+  // eating the token
+  this.lex();
+
+  // showing the debug
+  if (this.debug) {
+    this.showlog();
+  }
+
+  // handling comments
+  if (this.extractDoc) {
+    while (
+      this.token === this.tok.T_COMMENT ||
+      this.token === this.tok.T_DOC_COMMENT
+    ) {
+      // APPEND COMMENTS
+      if (this.token === this.tok.T_COMMENT) {
+        this._docs.push(this.read_comment());
+      } else {
+        this._docs.push(this.read_doc_comment());
+      }
+    }
+  }
+
+  return this;
+};
+```
+
+The `this.prev` provides each token's row, column and offset. We need to correspond these tokens to each part of final AST output, especially for operators. The operators' locations are not in the final AST.
+
+
+
 

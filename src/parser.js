@@ -272,9 +272,11 @@ parser.prototype.parse = function(code, filename) {
   this.innerListForm = false;
   const program = this.node("program");
   let childs = [];
-  this.next();
+  this.next();  // consume the next token, such as $a
   while (this.token != this.EOF) {
-    const node = this.read_start();
+    const node = this.read_start();   // /paser/main.js, start from a namespace or statement
+    // var util = require('util');
+    // console.log(util.inspect(node, { depth: null }));
     if (node !== null && node !== undefined) {
       if (Array.isArray(node)) {
         childs = childs.concat(node);
@@ -292,7 +294,6 @@ parser.prototype.parse = function(code, filename) {
   // node() => return this.ast.prepare(name, null, this);
   // AST.prototype.prepare = function(kind, docs, parser)
   const result = program(childs, this._errors, this._docs, this._tokens); // final output of AST
-  // console.log(util.inspect(result, { depth: null }));
   if (this.debug) {
     const errors = this.ast.checkNodes();
     if (errors.length > 0) {
@@ -536,11 +537,14 @@ parser.prototype.next = function() {
     // ignore '?>' from automated resolution
     // https://github.com/glayzzle/php-parser/issues/168
     this.prev = [
-      this.lexer.yylloc.last_line,
+      this.lexer.yylloc.last_line,  
       this.lexer.yylloc.last_column,
       this.lexer.offset
     ];
   }
+
+  // you can get every token's exact position here
+  // console.log(this.prev);
 
   // eating the token
   this.lex();
@@ -614,7 +618,7 @@ parser.prototype.lex = function() {
       this.token === this.tok.T_OPEN_TAG
     );
   } else {
-    this.token = this.lexer.lex() || this.EOF;
+    this.token = this.lexer.lex() || this.EOF;    // lexer.lex() return next match that has a token
   }
   return this;
 };

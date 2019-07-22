@@ -40,7 +40,7 @@ module.exports = {
     if (flag && flag[2] == 1) {
       // abstract function :
       result.parseFlags(flag);
-      if (this.expect(";")) {
+      if (this.expect(";")) {   // defined in parser.js, Force the parser to check the current token
         this.next();
       }
     } else {

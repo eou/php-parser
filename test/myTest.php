@@ -1,7 +1,6 @@
 <?php
-// Commmmmmmmment1
-$x = 5 /* + 15 */ + 5;
-// Commmmmmmmment1
-        echo $x;
-        // Commmmmmmmment1
+
+foreach (   $tips  as   $i   =>    $tip)    {
+    echo "Tip $i: " . $tip;
+}
 ?>

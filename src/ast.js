@@ -346,13 +346,13 @@ AST.prototype.resolvePrecedence = function(result, parser) {
 AST.prototype.prepare = function(kind, docs, parser) {
   let start = null;
   if (this.withPositions || this.withSource) {
-    start = this.position(parser);
+    start = this.position(parser);    // same as new Postion(...)
   }
   const self = this;
   // returns the node
   const result = function() {
     let location = null;
-    const args = Array.prototype.slice.call(arguments);
+    const args = Array.prototype.slice.call(arguments);   // transform args into an array object
     args.push(docs);
     if (typeof result.preBuild === "function") {
       result.preBuild(arguments);

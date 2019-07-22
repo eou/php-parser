@@ -10,12 +10,14 @@
  * @class
  * @property {AST} ast - the AST which converted from PHP source code
  */
-const unparser = function(ast) {
-    this.ast = ast;
+class unparser {
+    constructor(ast) {
+        this.ast = ast;
+    }
+    unparse() {
+        
+    }
 }
 
-unparser.prototype.unparse = function() {
-    
-}
 
 module.exports = unparser;

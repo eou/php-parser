@@ -129,11 +129,11 @@ const lexer = function(engine) {
 lexer.prototype.setInput = function(input) {
   this._input = input;
   this.size = input.length;
-  this.yylineno = 1;
-  this.offset = 0;
+  this.yylineno = 1;  // line number
+  this.offset = 0;    // distance from the starting of source code
   this.yyprevcol = 0;
   this.yytext = "";
-  this.yylloc = {
+  this.yylloc = {     // token locations
     first_offset: 0,
     first_line: 1,
     first_column: 0,
@@ -144,7 +144,7 @@ lexer.prototype.setInput = function(input) {
     last_column: 0
   };
   this.tokens = [];
-  this.done = this.offset >= this.size;
+  this.done = this.offset >= this.size;   // finish lexing
   if (!this.all_tokens && this.mode_eval) {
     this.conditionStack = ["INITIAL"];
     this.begin("ST_IN_SCRIPTING");

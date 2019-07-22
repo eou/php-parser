@@ -99,7 +99,6 @@ module.exports = {
       // see #193
       result.destroy(expr);
     }
-
     return expr;
   },
 
@@ -342,7 +341,6 @@ module.exports = {
     if (this.is("VARIABLE")) {
       result = this.node();
       expr = this.read_variable(false, false, false);
-
       // https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L877
       // should accept only a variable
       const isConst =
@@ -363,6 +361,7 @@ module.exports = {
           } else {
             right = this.read_expr();
           }
+          // create assign ast node
           return result("assign", expr, right, "=");
         }
 
