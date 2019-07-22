@@ -342,7 +342,7 @@ module.exports = {
     // SCALAR | VARIABLE
     if (this.is("VARIABLE")) {
       result = this.node();
-      expr = this.read_variable(false, false, false);
+      expr = this.read_variable(false, false, false);   // read the variable in the left of expression
       // https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L877
       // should accept only a variable
       const isConst =
@@ -350,11 +350,12 @@ module.exports = {
         (expr.kind === "staticlookup" && expr.offset.kind === "identifier");
 
       // VARIABLES SPECIFIC OPERATIONS
+      let op = {}, prev = null;   // prev is the end location of operator
       switch (this.token) {
         case "=": {
           if (isConst) this.error("VARIABLE");
-          let op = {}, prev = this.next().prev;
-          op.loc = new Position(prev[0], prev[1], prev[2]) 
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
           let right;
           if (this.token == "&") {
             if (this.next().token === this.tok.T_NEW) {
@@ -363,75 +364,128 @@ module.exports = {
               right = this.read_variable(false, false, true);
             }
           } else {
-            // console.log(this.prev);  // get = position
-
             right = this.read_expr();
           }
           // create assign ast node
           op.sign = "=";
-          let x = result("assign", expr, right, op);
-          console.log(x)
-          return x;
+          return result("assign", expr, right, op);
         }
 
         // operations :
         case this.tok.T_PLUS_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "+=");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "+=";
+          return result("assign", expr, this.read_expr(), op);
         }
 
-        case this.tok.T_MINUS_EQUAL:
+        case this.tok.T_MINUS_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "-=");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "-=";
+          return result("assign", expr, this.read_expr(), op);
+        }
 
-        case this.tok.T_MUL_EQUAL:
+        case this.tok.T_MUL_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "*=");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "*=";
+          return result("assign", expr, this.read_expr(), op);
+        }
 
-        case this.tok.T_POW_EQUAL:
+        case this.tok.T_POW_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "**=");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "**=";
+          return result("assign", expr, this.read_expr(), op);
+        }
 
-        case this.tok.T_DIV_EQUAL:
+        case this.tok.T_DIV_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "/=");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "/=";
+          return result("assign", expr, this.read_expr(), op);
+        }
 
-        case this.tok.T_CONCAT_EQUAL:
+        case this.tok.T_CONCAT_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), ".=");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = ".=";
+          return result("assign", expr, this.read_expr(), op);
+        } 
 
-        case this.tok.T_MOD_EQUAL:
+        case this.tok.T_MOD_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "%=");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "%=";
+          return result("assign", expr, this.read_expr(), op);
+        }
+          
+        case this.tok.T_AND_EQUAL: {
+          if (isConst) this.error("VARIABLE");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "&=";
+          return result("assign", expr, this.read_expr(), op);
+        }
 
-        case this.tok.T_AND_EQUAL:
+        case this.tok.T_OR_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "&=");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "|=";
+          return result("assign", expr, this.read_expr(), op);
+        }
 
-        case this.tok.T_OR_EQUAL:
+        case this.tok.T_XOR_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "|=");
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "^=";
+          return result("assign", expr, this.read_expr(), op);
+        }
 
-        case this.tok.T_XOR_EQUAL:
+        case this.tok.T_SL_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "^=");
-
-        case this.tok.T_SL_EQUAL:
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "<<=";
+          return result("assign", expr, this.read_expr(), op);
+        }
+          
+        case this.tok.T_SR_EQUAL: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), "<<=");
-
-        case this.tok.T_SR_EQUAL:
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = ">>=";
+          return result("assign", expr, this.read_expr(), op);
+        }
+        
+        // $a++;
+        case this.tok.T_INC: {
           if (isConst) this.error("VARIABLE");
-          return result("assign", expr, this.next().read_expr(), ">>=");
-
-        case this.tok.T_INC:
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "+";
+          return result("post", op, expr);
+        }
+          
+        // $a--;
+        case this.tok.T_DEC: {
           if (isConst) this.error("VARIABLE");
-          this.next();
-          return result("post", "+", expr);
-        case this.tok.T_DEC:
-          if (isConst) this.error("VARIABLE");
-          this.next();
+          prev = this.next().prev;
+          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.sign = "-";
           return result("post", "-", expr);
+        }
+          
         default:
           // see #193
           result.destroy(expr);
@@ -522,6 +576,7 @@ module.exports = {
       this.expect([this.tok.T_STRING, "VARIABLE"]);
     }
   },
+
   handleDereferencable: function(expr) {
     while (this.token !== this.EOF) {
       if (

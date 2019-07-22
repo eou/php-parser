@@ -22,7 +22,7 @@ var phpFile = fs.readFileSync(__dirname + "/myTest.php");
 
 var ast = parser.parseCode(phpFile);
 // console.log(util.inspect(parser, { depth: null }));
-// console.log(util.inspect(ast, { depth: null }));
+console.log(util.inspect(ast, { depth: null }));
 
 // var unparser = new unparser(ast);
 // unparser.unparse();
