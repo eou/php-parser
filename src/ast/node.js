@@ -70,6 +70,13 @@ Node.prototype.destroy = function(node) {
 Node.prototype.includeToken = function(parser) {
   if (this.loc) {
     if (this.loc.end) {
+      // last is for the position of the token before ';' such as ']' in array
+      var Position = require("./position.js");
+      this.loc.last = new Position();
+      this.loc.last.line = this.loc.end.line;
+      this.loc.last.column = this.loc.end.column;
+      this.loc.last.offset = this.loc.end.offset;
+  
       this.loc.end.line = parser.lexer.yylloc.last_line;
       this.loc.end.column = parser.lexer.yylloc.last_column;
       this.loc.end.offset = parser.lexer.offset;

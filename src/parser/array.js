@@ -20,7 +20,6 @@ module.exports = {
     let expect = null;
     let shortForm = false;
     const result = this.node(ArrayExpr);
-
     if (this.token === this.tok.T_ARRAY) {
       this.next().expect("(");
       expect = ")";

@@ -219,3 +219,31 @@ parser.prototype.next = function() {
 
 The `this.prev` array provides each token's row, column and offset. We need to correspond these tokens to each part of final AST output, especially for operators. The operators' locations are not recorded in the final AST.
 
+And from `this.prev` we can see that current token's location can be extracted from `lexer`:
+```javascript
+[
+  this.lexer.yylloc.last_line,  
+  this.lexer.yylloc.last_column,
+  this.lexer.offset
+];
+```
+
+### Add operator location in AST
+
+Need to change source code of `php-parser`.
+
+1. `=`
+2. `+=`
+3. `-=`
+4. `*=`
+5. `**=`
+6. `/=`
+7. `.=`
+8. `%=`
+9. `&=` 
+10. `|=`
+11. `^=`
+12. `<<=`
+13. `>>=`
+14. post `+`
+15. post `-`

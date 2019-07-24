@@ -68,5 +68,8 @@
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "madge": "^3.4.4"
   }
 }

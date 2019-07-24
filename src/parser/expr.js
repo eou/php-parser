@@ -119,7 +119,8 @@ module.exports = {
    */
   read_expr_item: function() {
     let result, expr;
-    if (this.token === "@") return this.node("silent")(this.next().read_expr());
+    if (this.token === "@") 
+      return this.node("silent")(this.next().read_expr());
     if (this.token === "+")
       return this.node("unary")("+", this.next().read_expr());
     if (this.token === "-")
@@ -340,6 +341,7 @@ module.exports = {
     }
 
     // SCALAR | VARIABLE
+    // Four scalar types: boolean, integer, float (floating-point number, aka double), string
     if (this.is("VARIABLE")) {
       result = this.node();
       expr = this.read_variable(false, false, false);   // read the variable in the left of expression
@@ -355,7 +357,7 @@ module.exports = {
         case "=": {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
           let right;
           if (this.token == "&") {
             if (this.next().token === this.tok.T_NEW) {
@@ -375,7 +377,7 @@ module.exports = {
         case this.tok.T_PLUS_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "+=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -383,7 +385,7 @@ module.exports = {
         case this.tok.T_MINUS_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "-=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -391,7 +393,7 @@ module.exports = {
         case this.tok.T_MUL_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "*=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -399,7 +401,7 @@ module.exports = {
         case this.tok.T_POW_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 3, prev[2] - 3);
           op.sign = "**=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -407,7 +409,7 @@ module.exports = {
         case this.tok.T_DIV_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "/=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -415,7 +417,7 @@ module.exports = {
         case this.tok.T_CONCAT_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = ".=";
           return result("assign", expr, this.read_expr(), op);
         } 
@@ -423,7 +425,7 @@ module.exports = {
         case this.tok.T_MOD_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "%=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -431,7 +433,7 @@ module.exports = {
         case this.tok.T_AND_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "&=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -439,7 +441,7 @@ module.exports = {
         case this.tok.T_OR_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "|=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -447,7 +449,7 @@ module.exports = {
         case this.tok.T_XOR_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "^=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -455,7 +457,7 @@ module.exports = {
         case this.tok.T_SL_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 3, prev[2] - 3);
           op.sign = "<<=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -463,7 +465,7 @@ module.exports = {
         case this.tok.T_SR_EQUAL: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 3, prev[2] - 3);
           op.sign = ">>=";
           return result("assign", expr, this.read_expr(), op);
         }
@@ -472,7 +474,7 @@ module.exports = {
         case this.tok.T_INC: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "+";
           return result("post", op, expr);
         }
@@ -481,7 +483,7 @@ module.exports = {
         case this.tok.T_DEC: {
           if (isConst) this.error("VARIABLE");
           prev = this.next().prev;
-          op.endLoc = new Position(prev[0], prev[1], prev[2]);
+          op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
           op.sign = "-";
           return result("post", "-", expr);
         }

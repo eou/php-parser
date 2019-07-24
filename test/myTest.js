@@ -6,8 +6,6 @@ var unparser = require("../plugin/unparser");
 var parser = new engine({
   // options
   parser: {
-    extractDoc: true,
-    php7: true,
     locations: true
   },
   ast: {
@@ -25,4 +23,5 @@ var ast = parser.parseCode(phpFile);
 console.log(util.inspect(ast, { depth: null }));
 
 // var unparser = new unparser(ast);
-// unparser.unparse();
+// console.log(unparser.unparse());
+// unparser.showAST();

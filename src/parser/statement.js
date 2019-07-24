@@ -60,6 +60,7 @@ module.exports = {
       case this.tok.T_NAMESPACE:
         return this.read_namespace();
       case this.tok.T_HALT_COMPILER: {
+        // halt parsing
         const result = this.node("halt");
         if (this.next().expect("(")) this.next();
         if (this.expect(")")) this.next();
@@ -67,8 +68,9 @@ module.exports = {
         this.lexer.done = true;
         return result(this.lexer._input.substring(this.lexer.offset));
       }
-      default:
+      default: {
         return this.read_statement();
+      }
     }
   },
   /**
