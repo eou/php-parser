@@ -60,10 +60,20 @@ unparser.prototype.unparse = function() {
  * unparse each node of AST
  */
 unparser.prototype.unparseNode = function(node) {
+  if (!node) {
+    return;
+  }
+
   this.updateBlanks(node.loc.start.line - 1, node.loc.start.column);
   switch (node.kind) {
     case "array": {
-
+      this.unparseArray(node);
+      // for array item seperator
+      if (node.seperator && node.seperator.sign === ",") {
+        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.code += ",";
+      }
+      break;
     }
 
     case "assign": {
@@ -74,6 +84,21 @@ unparser.prototype.unparseNode = function(node) {
       this.code += node.operator.sign;
       this.col += node.operator.sign.length;
       this.unparseNode(node.right);
+      // for array item seperator
+      if (node.seperator && node.seperator.sign === ",") {
+        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.code += ",";
+      }
+      break;
+    }
+
+    case "entry": {
+      this.unparseEntry(node);
+      // for array item seperator
+      if (node.seperator && node.seperator.sign === ",") {
+        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.code += ",";
+      }
       break;
     }
 
@@ -81,14 +106,15 @@ unparser.prototype.unparseNode = function(node) {
       // expressionstatement include many different expressions such as assign, eval and etc.
       // more AST node dependency info can be found in ./image.svg
       this.unparseNode(node.expression);
-      // ASSUME all expressionstatement will end up with ;
+      // ASSUME all expressionstatement will end up with ';'
+      // should be ';' in every expressionstatement even some codes can work without ';'
       this.updateBlanks(node.loc.end.line - 1, node.loc.end.column - 1);
       this.code += ";";
       break;
     }
 
     case "inline": {
-      this.unparse_inline(node);
+      this.unparseInline(node);
       // maybe blanks before the <?php
       if (!this.short_open_tag) {
         this.code += "<?php";
@@ -99,7 +125,12 @@ unparser.prototype.unparseNode = function(node) {
     }
 
     case "number": {
-      this.unparse_number(node);
+      this.unparseNumber(node);
+      // for array item seperator
+      if (node.seperator && node.seperator.sign === ",") {
+        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.code += ",";
+      }
       break;
     }
 
@@ -109,12 +140,26 @@ unparser.prototype.unparseNode = function(node) {
     }
 
     case "string": {
-      this.unparse_string(node);
+      this.unparseString(node);
+      // for array item seperator
+      if (node.seperator && node.seperator.sign === ",") {
+        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.code += ",";
+      }
       break;
     }
 
     case "variable": {
-      this.unparse_variable(node);
+      // '&' will use one more space
+      if (node.byref) {
+        this.code = this.code.substr(0, this.code.length - 1);
+      }
+      this.unparseVariable(node);
+      // for array item seperator
+      if (node.seperator && node.seperator.sign === ",") {
+        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.code += ",";
+      }
       break;
     }
 
@@ -155,6 +200,8 @@ unparser.prototype.newline = function() {
 
 // extends the unparser with submodules
 [
+  require("./unparser/array.js"),
+  require("./unparser/entry.js"),
   require("./unparser/inline.js"),
   require("./unparser/number.js"),
   require("./unparser/string.js"),
@@ -162,7 +209,9 @@ unparser.prototype.newline = function() {
 ].forEach(function(ext) {
   for (const k in ext) {
     if (unparser.prototype.hasOwnProperty(k)) {
-      throw new Error("Unparser: Function " + k + " is already defined - collision");
+      throw new Error(
+        "Unparser: Function " + k + " is already defined - collision"
+      );
     }
     unparser.prototype[k] = ext[k];
   }

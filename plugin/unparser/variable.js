@@ -14,7 +14,7 @@
  * {boolean} curly Indicate if the name is defined between curlies, ex `${foo}`
  */
 module.exports = {
-  unparse_variable: function(node) {
+  unparseVariable: function(node) {
     if (node.kind !== "variable") {
       throw new Error("Wrong node kind: " + node.kind + ", should be variable");
     }
@@ -29,7 +29,15 @@ module.exports = {
       this.code += "$" + node.name;
     }
 
-    this.row = node.loc.end.line - 1;
-    this.col = node.loc.end.column;
+
+
+    if (node.loc.last) {
+      // this node is followed by the end of statement ';'
+      this.row = node.loc.last.line - 1;
+      this.col = node.loc.last.column;
+    } else {
+      this.row = node.loc.end.line - 1;
+      this.col = node.loc.end.column;
+    }
   }
 };

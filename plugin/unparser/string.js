@@ -12,14 +12,20 @@
  * {boolean} isDoubleQuote
  */
 module.exports = {
-  unparse_string: function(node) {
+  unparseString: function(node) {
     if (node.kind !== "string") {
       throw new Error("Wrong node kind: " + node.kind + ", should be string");
     }
 
     this.code += node.raw;
 
-    this.row = node.loc.end.line - 1;
-    this.col = node.loc.end.column;
+    if (node.loc.last) {
+      // this node is followed by the end of statement ';'
+      this.row = node.loc.last.line - 1;
+      this.col = node.loc.last.column;
+    } else {
+      this.row = node.loc.end.line - 1;
+      this.col = node.loc.end.column;
+    }
   }
 };
