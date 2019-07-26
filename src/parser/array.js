@@ -98,6 +98,7 @@ module.exports = {
       seperator.sign = this.token;
       seperator.loc.line = this.lexer.yylloc.last_line;
       seperator.loc.column = this.lexer.yylloc.last_column;
+      seperator.loc.offset = this.lexer.offset;
       refVar_node.seperator = seperator;
       return refVar_node;
     } else {
@@ -114,6 +115,7 @@ module.exports = {
           seperator.sign = this.token;
           seperator.loc.line = this.lexer.yylloc.last_line;
           seperator.loc.column = this.lexer.yylloc.last_column;
+          seperator.loc.offset = this.lexer.offset;
           entry_node.seperator = seperator;
           return entry_node;
         } else {
@@ -123,6 +125,7 @@ module.exports = {
           seperator.sign = this.token;
           seperator.loc.line = this.lexer.yylloc.last_line;
           seperator.loc.column = this.lexer.yylloc.last_column;
+          seperator.loc.offset = this.lexer.offset;
           entry_node.seperator = seperator;
           return entry_node;
         }
@@ -131,6 +134,7 @@ module.exports = {
       seperator.sign = this.token;
       seperator.loc.line = this.lexer.yylloc.last_line;
       seperator.loc.column = this.lexer.yylloc.last_column;
+      seperator.loc.offset = this.lexer.offset;
       expr.seperator = seperator;
       return expr;
     }

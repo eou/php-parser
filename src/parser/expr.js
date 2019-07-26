@@ -14,66 +14,193 @@ module.exports = {
       expr = this.read_expr_item();
     }
     // binary operations
-    if (this.token === "|")
-      return result("bin", "|", expr, this.next().read_expr());
-    if (this.token === "&")
-      return result("bin", "&", expr, this.next().read_expr());
-    if (this.token === "^")
-      return result("bin", "^", expr, this.next().read_expr());
-    if (this.token === ".")
-      return result("bin", ".", expr, this.next().read_expr());
-    if (this.token === "+")
-      return result("bin", "+", expr, this.next().read_expr());
-    if (this.token === "-")
-      return result("bin", "-", expr, this.next().read_expr());
-    if (this.token === "*")
-      return result("bin", "*", expr, this.next().read_expr());
-    if (this.token === "/")
-      return result("bin", "/", expr, this.next().read_expr());
-    if (this.token === "%")
-      return result("bin", "%", expr, this.next().read_expr());
-    if (this.token === this.tok.T_POW)
-      return result("bin", "**", expr, this.next().read_expr());
-    if (this.token === this.tok.T_SL)
-      return result("bin", "<<", expr, this.next().read_expr());
-    if (this.token === this.tok.T_SR)
-      return result("bin", ">>", expr, this.next().read_expr());
+    if (this.token === "|") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = "|";
+      return result("bin", op, expr, this.read_expr());
+    }
+    if (this.token === "&") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = "&";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === "^") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = "^";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === ".") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = ".";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === "+") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = "+";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === "-") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = "-";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === "*") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = "*";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === "/") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = "/";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === "%") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = "%";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_POW) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = "**";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_SL) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = "<<";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_SR) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = ">>";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
     // more binary operations (formerly bool)
-    if (this.token === this.tok.T_BOOLEAN_OR)
-      return result("bin", "||", expr, this.next().read_expr());
-    if (this.token === this.tok.T_LOGICAL_OR)
-      return result("bin", "or", expr, this.next().read_expr());
-    if (this.token === this.tok.T_BOOLEAN_AND)
-      return result("bin", "&&", expr, this.next().read_expr());
-    if (this.token === this.tok.T_LOGICAL_AND)
-      return result("bin", "and", expr, this.next().read_expr());
-    if (this.token === this.tok.T_LOGICAL_XOR)
-      return result("bin", "xor", expr, this.next().read_expr());
-    if (this.token === this.tok.T_IS_IDENTICAL)
-      return result("bin", "===", expr, this.next().read_expr());
-    if (this.token === this.tok.T_IS_NOT_IDENTICAL)
-      return result("bin", "!==", expr, this.next().read_expr());
-    if (this.token === this.tok.T_IS_EQUAL)
-      return result("bin", "==", expr, this.next().read_expr());
-    if (this.token === this.tok.T_IS_NOT_EQUAL)
-      return result("bin", "!=", expr, this.next().read_expr());
-    if (this.token === "<")
-      return result("bin", "<", expr, this.next().read_expr());
-    if (this.token === ">")
-      return result("bin", ">", expr, this.next().read_expr());
-    if (this.token === this.tok.T_IS_SMALLER_OR_EQUAL)
-      return result("bin", "<=", expr, this.next().read_expr());
-    if (this.token === this.tok.T_IS_GREATER_OR_EQUAL)
-      return result("bin", ">=", expr, this.next().read_expr());
-    if (this.token === this.tok.T_SPACESHIP)
-      return result("bin", "<=>", expr, this.next().read_expr());
+    if (this.token === this.tok.T_BOOLEAN_OR) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = "||";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_LOGICAL_OR) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = "or";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_BOOLEAN_AND) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = "&&";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_LOGICAL_AND) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 3, prev[2] - 3);
+      op.sign = "and";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_LOGICAL_XOR) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 3, prev[2] - 3);
+      op.sign = "xor";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_IS_IDENTICAL) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 3, prev[2] - 3);
+      op.sign = "===";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_IS_NOT_IDENTICAL) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 3, prev[2] - 3);
+      op.sign = "!==";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_IS_EQUAL) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = "==";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_IS_NOT_EQUAL) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = "!=";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === "<") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = "<";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === ">") {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
+      op.sign = ">";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_IS_SMALLER_OR_EQUAL) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = "<=";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_IS_GREATER_OR_EQUAL) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = ">=";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
+    if (this.token === this.tok.T_SPACESHIP) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 3, prev[2] - 3);
+      op.sign = "<=>";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
     if (this.token === this.tok.T_INSTANCEOF) {
-      expr = result(
-        "bin",
-        "instanceof",
-        expr,
-        this.next().read_class_name_reference()
-      );
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 10, prev[2] - 10);
+      op.sign = "instanceof";
+      expr = result("bin", op, expr, this.next().read_class_name_reference());
       if (
         this.token !== ";" &&
         this.token !== this.tok.T_INLINE_HTML &&
@@ -85,18 +212,27 @@ module.exports = {
 
     // extra operations :
     // $username = $_GET['user'] ?? 'nobody';
-    if (this.token === this.tok.T_COALESCE)
-      return result("bin", "??", expr, this.next().read_expr());
-
+    if (this.token === this.tok.T_COALESCE) {
+      let op = {}, prev = this.next().prev;
+      op.startLoc = new Position(prev[0], prev[1] - 2, prev[2] - 2);
+      op.sign = "??";
+      return result("bin", op, expr, this.read_expr());
+    }
+      
     // extra operations :
     // $username = $_GET['user'] ? true : false;
     if (this.token === "?") {
-      let trueArg = null;
+      let trueArg = null, questionmarkLoc, colonmarkLoc;
       if (this.next().token !== ":") {
+        questionmarkLoc = new Position(this.prev[0], this.prev[1], this.prev[2]);
         trueArg = this.read_expr();
       }
       this.expect(":") && this.next();
-      return result("retif", expr, trueArg, this.read_expr());
+      colonmarkLoc = new Position(this.prev[0], this.prev[1], this.prev[2]);
+      let retif_node = result("retif", expr, trueArg, this.read_expr());
+      retif_node.loc.questionmarkLoc = questionmarkLoc;
+      retif_node.loc.colonmarkLoc = colonmarkLoc;
+      return retif_node;
     } else {
       // see #193
       result.destroy(expr);

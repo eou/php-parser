@@ -230,8 +230,9 @@ And from `this.prev` we can see that current token's location can be extracted f
 
 ### Add operator location in AST
 
-Need to change source code of `php-parser`.
+Need to change source code of `php-parser` to show position of each operator.
 
+`assign`:
 1. `=`
 2. `+=`
 3. `-=`
@@ -245,5 +246,40 @@ Need to change source code of `php-parser`.
 11. `^=`
 12. `<<=`
 13. `>>=`
-14. post `+`
-15. post `-`
+
+`post`:
+15. `++`
+16. `--`
+
+`bin`:
+16. `|`
+17. `&`
+18. `^`
+19. `.`
+20. `+`
+21. `-`
+22. `*`
+23. `/`
+24. `%`
+25. `**`
+26. `<<`
+27. `>>`
+28. `||`
+29. `or`
+30. `&&`
+31. `and`
+32. `xor`
+33. `===`
+34. `!==`
+35. `==`
+36. `!=`
+37. `<`
+38. `>`
+39. `<=`
+40. `>=`
+41. `<=>`
+42. `instanceof`
+43. `??`
+
+`retif`:
+44. `? :`

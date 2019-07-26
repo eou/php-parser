@@ -92,6 +92,16 @@ unparser.prototype.unparseNode = function(node) {
       break;
     }
 
+    case "bin": {
+      this.unparseBin(node);
+      // for array item seperator
+      if (node.seperator && node.seperator.sign === ",") {
+        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.code += ",";
+      }
+      break;
+    }
+
     case "entry": {
       this.unparseEntry(node);
       // for array item seperator
@@ -150,7 +160,7 @@ unparser.prototype.unparseNode = function(node) {
     }
 
     case "variable": {
-      // '&' will use one more space
+      // '&' will occupy one more space before variable, and the start of variable is start from '$'
       if (node.byref) {
         this.code = this.code.substr(0, this.code.length - 1);
       }
@@ -201,6 +211,7 @@ unparser.prototype.newline = function() {
 // extends the unparser with submodules
 [
   require("./unparser/array.js"),
+  require("./unparser/bin.js"),
   require("./unparser/entry.js"),
   require("./unparser/inline.js"),
   require("./unparser/number.js"),
