@@ -70,7 +70,10 @@ unparser.prototype.unparseNode = function(node) {
       this.unparseArray(node);
       // for array item seperator
       if (node.seperator && node.seperator.sign === ",") {
-        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.updateBlanks(
+          node.seperator.loc.line - 1,
+          node.seperator.loc.column - 1
+        );
         this.code += ",";
       }
       break;
@@ -80,13 +83,19 @@ unparser.prototype.unparseNode = function(node) {
       // left expression   operator   right expression
       this.unparseNode(node.left);
       // unparse operator
-      this.updateBlanks(node.operator.startLoc.line - 1, node.operator.startLoc.column);
+      this.updateBlanks(
+        node.operator.startLoc.line - 1,
+        node.operator.startLoc.column
+      );
       this.code += node.operator.sign;
       this.col += node.operator.sign.length;
       this.unparseNode(node.right);
       // for array item seperator
       if (node.seperator && node.seperator.sign === ",") {
-        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.updateBlanks(
+          node.seperator.loc.line - 1,
+          node.seperator.loc.column - 1
+        );
         this.code += ",";
       }
       break;
@@ -96,7 +105,10 @@ unparser.prototype.unparseNode = function(node) {
       this.unparseBin(node);
       // for array item seperator
       if (node.seperator && node.seperator.sign === ",") {
-        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.updateBlanks(
+          node.seperator.loc.line - 1,
+          node.seperator.loc.column - 1
+        );
         this.code += ",";
       }
       break;
@@ -106,7 +118,10 @@ unparser.prototype.unparseNode = function(node) {
       this.unparseEntry(node);
       // for array item seperator
       if (node.seperator && node.seperator.sign === ",") {
-        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.updateBlanks(
+          node.seperator.loc.line - 1,
+          node.seperator.loc.column - 1
+        );
         this.code += ",";
       }
       break;
@@ -138,7 +153,10 @@ unparser.prototype.unparseNode = function(node) {
       this.unparseNumber(node);
       // for array item seperator
       if (node.seperator && node.seperator.sign === ",") {
-        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.updateBlanks(
+          node.seperator.loc.line - 1,
+          node.seperator.loc.column - 1
+        );
         this.code += ",";
       }
       break;
@@ -149,11 +167,27 @@ unparser.prototype.unparseNode = function(node) {
       break;
     }
 
+    case "retif": {
+      this.unparseRetif(node);
+      // for array item seperator
+      if (node.seperator && node.seperator.sign === ",") {
+        this.updateBlanks(
+          node.seperator.loc.line - 1,
+          node.seperator.loc.column - 1
+        );
+        this.code += ",";
+      }
+      break;
+    }
+
     case "string": {
       this.unparseString(node);
       // for array item seperator
       if (node.seperator && node.seperator.sign === ",") {
-        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.updateBlanks(
+          node.seperator.loc.line - 1,
+          node.seperator.loc.column - 1
+        );
         this.code += ",";
       }
       break;
@@ -167,7 +201,10 @@ unparser.prototype.unparseNode = function(node) {
       this.unparseVariable(node);
       // for array item seperator
       if (node.seperator && node.seperator.sign === ",") {
-        this.updateBlanks(node.seperator.loc.line - 1, node.seperator.loc.column - 1);
+        this.updateBlanks(
+          node.seperator.loc.line - 1,
+          node.seperator.loc.column - 1
+        );
         this.code += ",";
       }
       break;
@@ -215,6 +252,7 @@ unparser.prototype.newline = function() {
   require("./unparser/entry.js"),
   require("./unparser/inline.js"),
   require("./unparser/number.js"),
+  require("./unparser/retif.js"),
   require("./unparser/string.js"),
   require("./unparser/variable.js")
 ].forEach(function(ext) {
