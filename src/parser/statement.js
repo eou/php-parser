@@ -229,9 +229,9 @@ module.exports = {
           this.token === this.tok.T_CONTINUE ? "continue" : "break"
         );
         let level = null;
-        this.next(); // look ahead
+        this.next(); // look ahead 
         if (this.token !== ";") {
-          level = this.read_expr();
+          level = this.read_expr();   // e.g. break 2;
         }
         this.expectEndOfStatement();
         return result(level);

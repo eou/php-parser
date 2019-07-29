@@ -21,7 +21,7 @@ module.exports = {
     this.unparseNode(node.left);
     this.updateBlanks(node.type.startLoc.line - 1, node.type.startLoc.column);
     this.code += node.type.sign;
-    this.col += 1;
+    this.col += node.type.sign.length;
     this.unparseNode(node.right);
 
     if (node.loc.last) {

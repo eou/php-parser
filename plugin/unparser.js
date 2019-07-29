@@ -31,7 +31,7 @@ class unparser {
   // helper function - print the AST with customized depths
   showAST(depth = null) {
     var util = require("util");
-    console.log(util.inspect(this.ast, { depth: depth }));
+    return (util.inspect(this.ast, { depth: depth }));
   }
 }
 
@@ -113,6 +113,29 @@ unparser.prototype.unparseNode = function(node) {
       }
       break;
     }
+    
+    case "block": {
+      this.unparseBlock(node);
+      break;
+    }
+
+    case "boolean": {
+      this.unparseBoolean(node);
+      // for array item seperator
+      if (node.seperator && node.seperator.sign === ",") {
+        this.updateBlanks(
+          node.seperator.loc.line - 1,
+          node.seperator.loc.column - 1
+        );
+        this.code += ",";
+      }
+      break;
+    }
+
+    case "break": {
+      this.unparseBreak(node);
+      break;
+    }
 
     case "entry": {
       this.unparseEntry(node);
@@ -135,6 +158,11 @@ unparser.prototype.unparseNode = function(node) {
       // should be ';' in every expressionstatement even some codes can work without ';'
       this.updateBlanks(node.loc.end.line - 1, node.loc.end.column - 1);
       this.code += ";";
+      break;
+    }
+
+    case "if": {
+      this.unparseIf(node);
       break;
     }
 
@@ -249,7 +277,11 @@ unparser.prototype.newline = function() {
 [
   require("./unparser/array.js"),
   require("./unparser/bin.js"),
+  require("./unparser/block.js"),
+  require("./unparser/boolean.js"),
+  require("./unparser/break.js"),
   require("./unparser/entry.js"),
+  require("./unparser/if.js"),
   require("./unparser/inline.js"),
   require("./unparser/number.js"),
   require("./unparser/retif.js"),
