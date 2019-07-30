@@ -1,16 +1,14 @@
 <?php
 
   
- if (   $var == 'Whatever'
-) 
-:
+ if (   $var == 'Whatever' ) {
       $v = 1;
-elseif (1) 
-:
-      $b = 2
-      ;
-else
-:
-      $a = 1;
-endif
-;
+ }   else if ( 
+       $a == 1) {
+       $a =2;
+ } elseif(2) {
+       1;
+ }
+ else{
+       2;
+ }

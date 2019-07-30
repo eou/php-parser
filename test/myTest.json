@@ -4,7 +4,7 @@ Program {
    Location {
      source: null,
      start: Position { line: 1, column: 0, offset: 0 },
-     end: Position { line: 16, column: 1, offset: 119 } },
+     end: Position { line: 14, column: 2, offset: 150 } },
   children:
    [ If {
        kind: 'if',
@@ -12,9 +12,9 @@ Program {
         Location {
           source: null,
           start: Position { line: 4, column: 1, offset: 11 },
-          end: Position { line: 16, column: 1, offset: 119 },
-          colonLoc: Position { line: 6, column: 0, offset: 41 },
-          endifLoc: Position { line: 15, column: 0, offset: 117 } },
+          end: Position { line: 14, column: 2, offset: 150 },
+          colonLoc:
+           Position { line: undefined, column: undefined, offset: undefined } },
        test:
         Bin {
           kind: 'bin',
@@ -24,7 +24,7 @@ Program {
              start: Position { line: 4, column: 8, offset: 18 },
              end: Position { line: 4, column: 26, offset: 36 },
              leftParLoc: Position { line: 4, column: 4, offset: 15 },
-             rightParLoc: Position { line: 5, column: 0, offset: 38 } },
+             rightParLoc: Position { line: 4, column: 27, offset: 38 } },
           type:
            { startLoc: Position { line: 4, column: 13, offset: 23 },
              sign: '==' },
@@ -57,27 +57,27 @@ Program {
           loc:
            Location {
              source: null,
-             start: Position { line: 7, column: 6, offset: 48 },
-             end: Position { line: 14, column: 13, offset: 111 } },
+             start: Position { line: 4, column: 29, offset: 39 },
+             end: Position { line: 6, column: 2, offset: 57 } },
           children:
            [ ExpressionStatement {
                kind: 'expressionstatement',
                loc:
                 Location {
                   source: null,
-                  start: Position { line: 7, column: 6, offset: 48 },
-                  end: Position { line: 7, column: 13, offset: 55 } },
+                  start: Position { line: 5, column: 6, offset: 47 },
+                  end: Position { line: 5, column: 13, offset: 54 } },
                expression:
                 Assign {
                   kind: 'assign',
                   loc:
                    Location {
                      source: null,
-                     start: Position { line: 7, column: 6, offset: 48 },
-                     end: Position { line: 7, column: 13, offset: 55 },
-                     last: Position { line: 7, column: 12, offset: 54 } },
+                     start: Position { line: 5, column: 6, offset: 47 },
+                     end: Position { line: 5, column: 13, offset: 54 },
+                     last: Position { line: 5, column: 12, offset: 53 } },
                   operator:
-                   { startLoc: Position { line: 7, column: 9, offset: 51 },
+                   { startLoc: Position { line: 5, column: 9, offset: 50 },
                      sign: '=' },
                   left:
                    Variable {
@@ -85,8 +85,8 @@ Program {
                      loc:
                       Location {
                         source: null,
-                        start: Position { line: 7, column: 6, offset: 48 },
-                        end: Position { line: 7, column: 8, offset: 50 } },
+                        start: Position { line: 5, column: 6, offset: 47 },
+                        end: Position { line: 5, column: 8, offset: 49 } },
                      name: 'v',
                      byref: false,
                      curly: false },
@@ -96,57 +96,80 @@ Program {
                      loc:
                       Location {
                         source: null,
-                        start: Position { line: 7, column: 11, offset: 53 },
-                        end: Position { line: 7, column: 12, offset: 54 } },
-                     value: '1' } } } ],
-          curly: false },
+                        start: Position { line: 5, column: 11, offset: 52 },
+                        end: Position { line: 5, column: 12, offset: 53 } },
+                     value: '1' } } } ] },
        alternate:
         If {
           kind: 'if',
           loc:
            Location {
              source: null,
-             start: Position { line: 8, column: 0, offset: 56, col: NaN },
-             end: Position { line: 14, column: 13, offset: 111 },
-             colonLoc: Position { line: 9, column: 0, offset: 69 } },
+             start: Position { line: 6, column: 10, offset: 65 },
+             end: Position { line: 14, column: 2, offset: 150 },
+             colonLoc:
+              Position { line: undefined, column: undefined, offset: undefined },
+             elseLoc: Position { line: 6, column: 5, offset: 60 } },
           test:
-           Number {
-             kind: 'number',
+           Bin {
+             kind: 'bin',
              loc:
               Location {
                 source: null,
-                start: Position { line: 8, column: 8, offset: 64 },
-                end: Position { line: 8, column: 9, offset: 65 },
-                leftParLoc: Position { line: 8, column: 7, offset: 64 },
-                rightParLoc: Position { line: 8, column: 9, offset: 66 } },
-             value: '1' },
+                start: Position { line: 7, column: 7, offset: 78 },
+                end: Position { line: 7, column: 14, offset: 85 },
+                leftParLoc: Position { line: 6, column: 13, offset: 69 },
+                rightParLoc: Position { line: 7, column: 14, offset: 86 } },
+             type:
+              { startLoc: Position { line: 7, column: 10, offset: 81 },
+                sign: '==' },
+             left:
+              Variable {
+                kind: 'variable',
+                loc:
+                 Location {
+                   source: null,
+                   start: Position { line: 7, column: 7, offset: 78 },
+                   end: Position { line: 7, column: 9, offset: 80 } },
+                name: 'a',
+                byref: false,
+                curly: false },
+             right:
+              Number {
+                kind: 'number',
+                loc:
+                 Location {
+                   source: null,
+                   start: Position { line: 7, column: 13, offset: 84 },
+                   end: Position { line: 7, column: 14, offset: 85 } },
+                value: '1' } },
           body:
            Block {
              kind: 'block',
              loc:
               Location {
                 source: null,
-                start: Position { line: 10, column: 6, offset: 76 },
-                end: Position { line: 14, column: 13, offset: 111 } },
+                start: Position { line: 7, column: 16, offset: 87 },
+                end: Position { line: 9, column: 2, offset: 105 } },
              children:
               [ ExpressionStatement {
                   kind: 'expressionstatement',
                   loc:
                    Location {
                      source: null,
-                     start: Position { line: 10, column: 6, offset: 76 },
-                     end: Position { line: 11, column: 7, offset: 90 } },
+                     start: Position { line: 8, column: 7, offset: 96 },
+                     end: Position { line: 8, column: 13, offset: 102 } },
                   expression:
                    Assign {
                      kind: 'assign',
                      loc:
                       Location {
                         source: null,
-                        start: Position { line: 10, column: 6, offset: 76 },
-                        end: Position { line: 11, column: 7, offset: 90 },
-                        last: Position { line: 10, column: 12, offset: 82 } },
+                        start: Position { line: 8, column: 7, offset: 96 },
+                        end: Position { line: 8, column: 13, offset: 102 },
+                        last: Position { line: 8, column: 12, offset: 101 } },
                      operator:
-                      { startLoc: Position { line: 10, column: 9, offset: 79 },
+                      { startLoc: Position { line: 8, column: 10, offset: 99 },
                         sign: '=' },
                      left:
                       Variable {
@@ -154,58 +177,8 @@ Program {
                         loc:
                          Location {
                            source: null,
-                           start: Position { line: 10, column: 6, offset: 76 },
-                           end: Position { line: 10, column: 8, offset: 78 } },
-                        name: 'b',
-                        byref: false,
-                        curly: false },
-                     right:
-                      Number {
-                        kind: 'number',
-                        loc:
-                         Location {
-                           source: null,
-                           start: Position { line: 10, column: 11, offset: 81 },
-                           end: Position { line: 10, column: 12, offset: 82 } },
-                        value: '2' } } } ],
-             curly: false },
-          alternate:
-           Block {
-             kind: 'block',
-             loc:
-              Location {
-                source: null,
-                start: Position { line: 12, column: 0, offset: 91, col: NaN },
-                end: Position { line: 14, column: 13, offset: 111 },
-                colonLoc: Position { line: 13, column: 0, offset: 97 } },
-             children:
-              [ ExpressionStatement {
-                  kind: 'expressionstatement',
-                  loc:
-                   Location {
-                     source: null,
-                     start: Position { line: 14, column: 6, offset: 104 },
-                     end: Position { line: 14, column: 13, offset: 111 } },
-                  expression:
-                   Assign {
-                     kind: 'assign',
-                     loc:
-                      Location {
-                        source: null,
-                        start: Position { line: 14, column: 6, offset: 104 },
-                        end: Position { line: 14, column: 13, offset: 111 },
-                        last: Position { line: 14, column: 12, offset: 110 } },
-                     operator:
-                      { startLoc: Position { line: 14, column: 9, offset: 107 },
-                        sign: '=' },
-                     left:
-                      Variable {
-                        kind: 'variable',
-                        loc:
-                         Location {
-                           source: null,
-                           start: Position { line: 14, column: 6, offset: 104 },
-                           end: Position { line: 14, column: 8, offset: 106 } },
+                           start: Position { line: 8, column: 7, offset: 96 },
+                           end: Position { line: 8, column: 9, offset: 98 } },
                         name: 'a',
                         byref: false,
                         curly: false },
@@ -215,10 +188,88 @@ Program {
                         loc:
                          Location {
                            source: null,
-                           start: Position { line: 14, column: 11, offset: 109 },
-                           end: Position { line: 14, column: 12, offset: 110 } },
-                        value: '1' } } } ],
-             curly: false },
-          shortForm: true },
-       shortForm: true } ],
+                           start: Position { line: 8, column: 11, offset: 100 },
+                           end: Position { line: 8, column: 12, offset: 101 } },
+                        value: '2' } } } ] },
+          alternate:
+           If {
+             kind: 'if',
+             loc:
+              Location {
+                source: null,
+                start: Position { line: 9, column: 3, offset: 106 },
+                end: Position { line: 14, column: 2, offset: 150 },
+                colonLoc:
+                 Position { line: undefined, column: undefined, offset: undefined },
+                elseLoc: Position { line: 9, column: 3, offset: 106 } },
+             test:
+              Number {
+                kind: 'number',
+                loc:
+                 Location {
+                   source: null,
+                   start: Position { line: 9, column: 10, offset: 113 },
+                   end: Position { line: 9, column: 11, offset: 114 },
+                   leftParLoc: Position { line: 9, column: 9, offset: 113 },
+                   rightParLoc: Position { line: 9, column: 11, offset: 115 } },
+                value: '2' },
+             body:
+              Block {
+                kind: 'block',
+                loc:
+                 Location {
+                   source: null,
+                   start: Position { line: 9, column: 13, offset: 116 },
+                   end: Position { line: 11, column: 2, offset: 130 } },
+                children:
+                 [ ExpressionStatement {
+                     kind: 'expressionstatement',
+                     loc:
+                      Location {
+                        source: null,
+                        start: Position { line: 10, column: 7, offset: 125 },
+                        end: Position { line: 10, column: 9, offset: 127 } },
+                     expression:
+                      Number {
+                        kind: 'number',
+                        loc:
+                         Location {
+                           source: null,
+                           start: Position { line: 10, column: 7, offset: 125 },
+                           end: Position { line: 10, column: 9, offset: 127 },
+                           last: Position { line: 10, column: 8, offset: 126 } },
+                        value: '1' } } ] },
+             alternate:
+              Block {
+                kind: 'block',
+                loc:
+                 Location {
+                   source: null,
+                   start: Position { line: 12, column: 5, offset: 136 },
+                   end: Position { line: 14, column: 2, offset: 150 },
+                   elseLoc: Position { line: 12, column: 1, offset: 132 } },
+                children:
+                 [ ExpressionStatement {
+                     kind: 'expressionstatement',
+                     loc:
+                      Location {
+                        source: null,
+                        start: Position { line: 13, column: 7, offset: 145 },
+                        end: Position { line: 13, column: 9, offset: 147 } },
+                     expression:
+                      Number {
+                        kind: 'number',
+                        loc:
+                         Location {
+                           source: null,
+                           start: Position { line: 13, column: 7, offset: 145 },
+                           end: Position { line: 13, column: 9, offset: 147 },
+                           last: Position { line: 13, column: 8, offset: 146 } },
+                        value: '2' } } ],
+                sign: null },
+             shortForm: false,
+             sign: 'elseif' },
+          shortForm: false,
+          sign: 'else if' },
+       shortForm: false } ],
   errors: [] }

@@ -53,9 +53,27 @@ module.exports = {
     } else {
       body = this.read_statement();
       if (this.token === this.tok.T_ELSEIF) {
+        let sign = "elseif", elseLoc = new Position();
+        elseLoc.line = this.lexer.yylloc.first_line;
+        elseLoc.column = this.lexer.yylloc.first_column;
+        elseLoc.offset = this.lexer.yylloc.first_offset; 
         alternate = this.read_if();
+        alternate.sign = sign;
+        alternate.loc.elseLoc = elseLoc;
       } else if (this.token === this.tok.T_ELSE) {
-        alternate = this.next().read_statement();
+        let sign = null, elseLoc = new Position();
+        elseLoc.line = this.lexer.yylloc.first_line; 
+        elseLoc.column = this.lexer.yylloc.first_column; 
+        elseLoc.offset = this.lexer.yylloc.first_offset; 
+        this.next();
+        // else if {} , not elseif {}
+        if (this.lexer.yytext === "if") {
+          sign = "else if";
+        }
+        alternate = this.read_statement();
+        alternate.sign = sign;
+        alternate.loc.elseLoc = elseLoc;
+        console.log(alternate);
       }
     }
     // colonloc is in if node

@@ -20,6 +20,7 @@ module.exports = {
     }
 
     // unparse if condition statement
+    // if( expr )
     this.code += "if";
     this.col += 2;
     this.updateBlanks(node.test.loc.leftParLoc.line - 1, node.test.loc.leftParLoc.column);
@@ -42,14 +43,16 @@ module.exports = {
       this.col += 1;
       this.unparseNode(node.body);
 
-      let _node = node.alternate;
-      this.updateBlanks(_node.loc.start.line - 1, _node.loc.start.column);
-      _node.loc.start.col += 4;
-      this.code += "else";
-      this.col += 4;
-      this.unparseNode(_node);
+      if (node.alternate) {
+        let _node = node.alternate;
+        this.updateBlanks(_node.loc.start.line - 1, _node.loc.start.column);
+        _node.loc.start.col += 4;
+        this.code += "else";
+        this.col += 4;
+        this.unparseNode(_node);
+      }
 
-      if (node.loc.endifLoc !== undefined) {
+      if (node.loc.endifLoc) {
         this.updateBlanks(node.loc.endifLoc.line - 1, node.loc.endifLoc.column);
         this.code += "endif";
         this.col += 5;
@@ -64,6 +67,25 @@ module.exports = {
        * elseif() {}
        * else {}
        */
+      this.unparseNode(node.body);
+      // else if(), elseif(), else
+      if (node.alternate) {
+        let _node = node.alternate;
+        console.log(_node);
+        // else if(), elseif()
+        if (_node.sign) {
+          this.updateBlanks(_node.loc.elseLoc.line - 1, _node.loc.elseLoc.column);
+          this.code += "else";
+          this.col += 4;
+          this.unparseNode(_node);
+        } else {
+          // else
+          this.updateBlanks(_node.loc.start.line - 1, _node.loc.start.column - 5);
+          this.code += "else";
+          this.col += 4;
+          this.unparseNode(_node);
+        }
+      }
     }
 
     this.row = node.loc.end.line - 1;
