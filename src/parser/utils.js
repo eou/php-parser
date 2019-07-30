@@ -5,6 +5,8 @@
  */
 "use strict";
 
+var Position = require('../ast/position.js');
+
 module.exports = {
   /**
    * Reads a short form of tokens
@@ -12,15 +14,30 @@ module.exports = {
    * @return {Block}
    */
   read_short_form: function(token) {
-    const body = this.node("block");
-    const items = [];
-    if (this.expect(":")) this.next();
+    let body = this.node("block");
+    let items = [];
+    let colonLoc = new Position();
+    if (this.expect(":")) {
+      this.next();
+      colonLoc.line = this.prev[0];
+      colonLoc.column = this.prev[1] - 1; // end column
+      colonLoc.offset = this.prev[2];
+    }
     while (this.token != this.EOF && this.token !== token) {
       items.push(this.read_inner_statement());
     }
-    if (this.expect(token)) this.next();
+    let endTokenLoc = new Position();
+    if (this.expect(token)) {
+      this.next();
+      endTokenLoc.line = this.prev[0];
+      endTokenLoc.column = this.prev[1];  // end column
+      endTokenLoc.offset = this.prev[2];
+    }
     this.expectEndOfStatement();
-    return body(null, items);
+    body = body(null, items);
+    body.loc.colonLoc = colonLoc;
+    body.loc.endTokenLoc = endTokenLoc;
+    return body;
   },
 
   /**

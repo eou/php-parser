@@ -16,7 +16,7 @@ module.exports = {
       throw new Error("Wrong node kind: " + node.kind + ", should be block");
     }
 
-    if (node.loc.colonLoc !== undefined) {
+    if (node.loc.colonLoc) {
       // for shortForm else statement
       this.updateBlanks(node.loc.colonLoc.line - 1, node.loc.colonLoc.column);
       this.code += ":";
@@ -24,7 +24,7 @@ module.exports = {
       node.children.forEach(child => {
         this.unparseNode(child);
       });
-    } else if (node.curly !== undefined) {
+    } else if (node.curly) {
       // for shortForm if statement
       node.children.forEach(child => {
         this.unparseNode(child);
@@ -40,7 +40,7 @@ module.exports = {
       this.col += 1;
     }
 
-    if (node.curly === undefined) {
+    if (node.curly === undefined && node.loc.endTokenLoc === undefined) {
       this.row = node.loc.end.line - 1;
       this.col = node.loc.end.column;
     }

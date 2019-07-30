@@ -63,7 +63,7 @@ unparser.prototype.unparseNode = function(node) {
   if (!node) {
     return;
   }
-
+  
   this.updateBlanks(node.loc.start.line - 1, node.loc.start.column);
   switch (node.kind) {
     case "array": {
@@ -158,6 +158,11 @@ unparser.prototype.unparseNode = function(node) {
       // should be ';' in every expressionstatement even some codes can work without ';'
       this.updateBlanks(node.loc.end.line - 1, node.loc.end.column - 1);
       this.code += ";";
+      break;
+    }
+
+    case "for": {
+      this.unparseFor(node);
       break;
     }
 
@@ -281,6 +286,7 @@ unparser.prototype.newline = function() {
   require("./unparser/boolean.js"),
   require("./unparser/break.js"),
   require("./unparser/entry.js"),
+  require("./unparser/for.js"),
   require("./unparser/if.js"),
   require("./unparser/inline.js"),
   require("./unparser/number.js"),

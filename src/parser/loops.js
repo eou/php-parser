@@ -5,6 +5,8 @@
  */
 "use strict";
 
+var Position = require("../ast/position.js");
+
 module.exports = {
   /**
    * Reads a while statement
@@ -72,23 +74,54 @@ module.exports = {
     let body = null;
     let shortForm = false;
     if (this.expect("(")) this.next();
+    let leftParLoc = new Position(), 
+        fstSemiColLoc = new Position(), 
+        sndSemiColLoc = new Position(),
+        rightParLoc = new Position();
+    leftParLoc.line = this.prev[0];
+    leftParLoc.column = this.prev[1] - 1;
+    leftParLoc.offset = this.prev[2];
     if (this.token !== ";") {
       init = this.read_list(this.read_expr, ",");
-      if (this.expect(";")) this.next();
+      if (this.expect(";")) {
+        this.next();
+        fstSemiColLoc.line = this.prev[0];
+        fstSemiColLoc.column = this.prev[1] - 1;
+        fstSemiColLoc.offset = this.prev[2];
+      }
     } else {
       this.next();
+      fstSemiColLoc.line = this.prev[0];
+      fstSemiColLoc.column = this.prev[1] - 1;
+      fstSemiColLoc.offset = this.prev[2];
     }
     if (this.token !== ";") {
       test = this.read_list(this.read_expr, ",");
-      if (this.expect(";")) this.next();
+      if (this.expect(";")) {
+        this.next();
+        sndSemiColLoc.line = this.prev[0];
+        sndSemiColLoc.column = this.prev[1] - 1;
+        sndSemiColLoc.offset = this.prev[2];
+      }
     } else {
       this.next();
+      sndSemiColLoc.line = this.prev[0];
+      sndSemiColLoc.column = this.prev[1] - 1;
+      sndSemiColLoc.offset = this.prev[2];
     }
     if (this.token !== ")") {
       increment = this.read_list(this.read_expr, ",");
-      if (this.expect(")")) this.next();
+      if (this.expect(")")) {
+        this.next();
+        rightParLoc.line = this.prev[0];
+        rightParLoc.column = this.prev[1] - 1;
+        rightParLoc.offset = this.prev[2];
+      }
     } else {
       this.next();
+      rightParLoc.line = this.prev[0];
+      rightParLoc.column = this.prev[1] - 1;
+      rightParLoc.offset = this.prev[2];
     }
     if (this.token === ":") {
       shortForm = true;
@@ -96,7 +129,12 @@ module.exports = {
     } else {
       body = this.read_statement();
     }
-    return result(init, test, increment, body, shortForm);
+    let for_node = result(init, test, increment, body, shortForm);
+    for_node.loc.leftParLoc = leftParLoc;
+    for_node.loc.rightParLoc = rightParLoc;
+    for_node.loc.fstSemiColLoc = fstSemiColLoc;
+    for_node.loc.sndSemiColLoc = sndSemiColLoc;
+    return for_node;
   },
   /**
    * Reads a foreach loop
