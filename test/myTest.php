@@ -1,8 +1,10 @@
 <?php
 
-
-for 
-( ; ; ) {
-      $i = 2;
+foreach 
+($arr 
+as   $key 
+=>  $value
+) {
+      
+$arr = 1;
 }
-

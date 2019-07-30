@@ -23,6 +23,7 @@ module.exports = {
 
     // for ( ; ; )
     this.code += "for";
+    this.col += 3;
     this.updateBlanks(node.loc.leftParLoc.line - 1, node.loc.leftParLoc.column);
     this.code += "(";
     this.col += 1;

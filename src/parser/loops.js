@@ -152,14 +152,30 @@ module.exports = {
     let value = null;
     let body = null;
     let shortForm = false;
-    if (this.expect("(")) this.next();
+    let leftParLoc = new Position(),
+        rightParLoc = new Position(),
+        asLoc = new Position(),
+        arrowLoc = new Position();
+    if (this.expect("(")) {
+      this.next();
+      leftParLoc.line = this.prev[0];
+      leftParLoc.column = this.prev[1] - 1;
+      leftParLoc.offset = this.prev[2];
+    }
     source = this.read_expr();
     if (this.expect(this.tok.T_AS)) {
       this.next();
+      asLoc.line = this.prev[0];
+      asLoc.column = this.prev[1] - 2;
+      asLoc.offset = this.prev[2];
       value = this.read_foreach_variable();
       if (this.token === this.tok.T_DOUBLE_ARROW) {
         key = value;
-        value = this.next().read_foreach_variable();
+        this.next();
+        arrowLoc.line = this.prev[0];
+        arrowLoc.column = this.prev[1] - 2;
+        arrowLoc.offset = this.prev[2];
+        value = this.read_foreach_variable();
       }
     }
 
@@ -168,7 +184,12 @@ module.exports = {
       this.raiseError("Fatal Error : Cannot use list as key element");
     }
 
-    if (this.expect(")")) this.next();
+    if (this.expect(")")) {
+      this.next();
+      rightParLoc.line = this.prev[0];
+      rightParLoc.column = this.prev[1] - 1;
+      rightParLoc.offset = this.prev[2];
+    }
 
     if (this.token === ":") {
       shortForm = true;
@@ -176,7 +197,12 @@ module.exports = {
     } else {
       body = this.read_statement();
     }
-    return result(source, key, value, body, shortForm);
+    let foreach_node = result(source, key, value, body, shortForm);
+    foreach_node.loc.leftParLoc = leftParLoc;
+    foreach_node.loc.rightParLoc = rightParLoc;
+    foreach_node.loc.asLoc = asLoc;
+    foreach_node.loc.arrowLoc = arrowLoc;
+    return foreach_node;
   },
   /**
    * Reads a foreach variable statement

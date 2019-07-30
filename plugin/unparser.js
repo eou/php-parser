@@ -166,6 +166,11 @@ unparser.prototype.unparseNode = function(node) {
       break;
     }
 
+    case "foreach": {
+      this.unparseForeach(node);
+      break;
+    }
+
     case "if": {
       this.unparseIf(node);
       break;
@@ -287,6 +292,7 @@ unparser.prototype.newline = function() {
   require("./unparser/break.js"),
   require("./unparser/entry.js"),
   require("./unparser/for.js"),
+  require("./unparser/foreach.js"),
   require("./unparser/if.js"),
   require("./unparser/inline.js"),
   require("./unparser/number.js"),
