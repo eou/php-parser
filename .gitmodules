@@ -1,3 +1,0 @@
-[submodule "php-interpreter"]
-	path = php-interpreter
-	url = https://github.com/eou/php-interpreter.git
