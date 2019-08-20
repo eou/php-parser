@@ -1,5 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`new #348 - byref usage deprecated 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+        "operator": "=",
+        "right": ByRef {
+          "kind": "byref",
+          "what": New {
+            "arguments": Array [],
+            "kind": "new",
+            "what": ClassReference {
+              "kind": "classreference",
+              "name": "Foo",
+              "resolution": "uqn",
+            },
+          },
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": undefined,
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected 'new' (T_NEW) on line 1",
+      "token": "'new' (T_NEW)",
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`new anonymous 1`] = `
 Program {
   "children": Array [
@@ -59,7 +100,6 @@ Program {
       "expression": New {
         "arguments": Array [
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
@@ -92,19 +132,16 @@ Program {
       "expression": New {
         "arguments": Array [
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "one",
           },
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "two",
           },
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "three",
@@ -303,7 +340,6 @@ Program {
         "arguments": Array [],
         "kind": "new",
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",

@@ -1,6 +1,6 @@
 {
   "name": "php-parser",
-  "version": "3.0.0-prerelease.8",
+  "version": "3.0.0-prerelease.9",
   "description": "Parse PHP code and returns its AST",
   "main": "src/index.js",
   "browser": "dist/php-parser.js",
@@ -64,7 +64,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "jest": "^24.1.0",
     "jsdoc": "^3.5.5",
-    "jsdoc-template": "git+https://github.com/braintree/jsdoc-template.git",
+    "jsdoc-template": "^1.2.0",
     "prettier": "^1.16.4",
     "ts-node": "^8.3.0",
     "uglifyjs-webpack-plugin": "^2.1.2",

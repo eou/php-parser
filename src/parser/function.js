@@ -82,20 +82,38 @@ module.exports = {
     if (type !== 1) {
       const nameNode = this.node("identifier");
       if (type === 2) {
-        if (
-          this.token === this.tok.T_STRING ||
-          (this.php7 && this.is("IDENTIFIER"))
-        ) {
+        if (this.php7) {
+          if (this.token === this.tok.T_STRING || this.is("IDENTIFIER")) {
+            name = this.text();
+            this.next();
+          } else if (!this.php74) {
+            this.error("IDENTIFIER");
+          }
+        } else if (this.token === this.tok.T_STRING) {
           name = this.text();
           this.next();
         } else {
           this.error("IDENTIFIER");
         }
       } else {
-        if (this.expect(this.tok.T_STRING)) {
-          name = this.text();
+        if (this.php7) {
+          if (this.token === this.tok.T_STRING) {
+            name = this.text();
+            this.next();
+          } else if (this.php74) {
+            if (!this.expect("(")) {
+              this.next();
+            }
+          } else {
+            this.error(this.tok.T_STRING);
+            this.next();
+          }
+        } else {
+          if (this.expect(this.tok.T_STRING)) {
+            name = this.text();
+          }
+          this.next();
         }
-        this.next();
       }
       name = nameNode(name);
     }
@@ -126,16 +144,14 @@ module.exports = {
    * ```
    */
   read_lexical_var: function() {
-    const result = this.node("variable");
-    let isRef = false;
     if (this.token === "&") {
-      isRef = true;
-      this.next();
+      return this.node("byref")(this.next().read_lexical_var());
     }
+    const result = this.node("variable");
     this.expect(this.tok.T_VARIABLE);
     const name = this.text().substring(1);
     this.next();
-    return result(name, isRef, false);
+    return result(name, false);
   },
   /**
    * reads a list of parameters

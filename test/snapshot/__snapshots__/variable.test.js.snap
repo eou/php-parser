@@ -7,7 +7,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -25,13 +24,11 @@ Program {
                 "offset": OffsetLookup {
                   "kind": "offsetlookup",
                   "offset": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "foo",
                   },
                   "what": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "bar",
@@ -47,7 +44,6 @@ Program {
                       "name": "foo",
                     },
                     "what": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "a",
@@ -75,7 +71,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "?",
@@ -124,7 +119,6 @@ Program {
             "name": "bar",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "foo",
@@ -263,7 +257,6 @@ Program {
               "name": "foo",
             },
             "what": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "this",
@@ -370,7 +363,6 @@ Program {
             "name": "foo",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "this",
@@ -383,7 +375,6 @@ Program {
       "expression": StaticLookup {
         "kind": "staticlookup",
         "offset": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -428,7 +419,6 @@ Program {
                   "name": "foo",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "this",
@@ -453,11 +443,9 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "a",
@@ -478,15 +466,12 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "a",
@@ -508,13 +493,11 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": true,
           "kind": "variable",
           "name": Bin {
             "kind": "bin",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "a",
@@ -548,7 +531,6 @@ Program {
           "offset": Bin {
             "kind": "bin",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "a",
@@ -563,7 +545,6 @@ Program {
             "type": ".",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "foo",
@@ -593,7 +574,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -613,7 +593,6 @@ Program {
                   "value": "1",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "a",
@@ -630,7 +609,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -653,7 +631,6 @@ Program {
                   "value": "a",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "a",
@@ -670,7 +647,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -686,13 +662,11 @@ Program {
               "expression": OffsetLookup {
                 "kind": "offsetlookup",
                 "offset": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "b",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "a",
@@ -730,7 +704,6 @@ Program {
           "what": StaticLookup {
             "kind": "staticlookup",
             "offset": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "a",
@@ -760,13 +733,11 @@ Program {
         "left": List {
           "items": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "id1",
             },
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "name1",
@@ -783,7 +754,6 @@ Program {
             "value": "0",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "data",
@@ -805,7 +775,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -825,17 +794,18 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "b",
         },
         "operator": "=",
-        "right": Variable {
-          "byref": true,
-          "curly": false,
-          "kind": "variable",
-          "name": "c",
+        "right": ByRef {
+          "kind": "byref",
+          "what": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "c",
+          },
         },
       },
       "kind": "expressionstatement",
@@ -850,7 +820,6 @@ Program {
             "name": "b",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "a",
@@ -878,7 +847,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -901,7 +869,6 @@ Program {
                   "value": "baz",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "bar",
@@ -934,7 +901,6 @@ Program {
           "what": StaticLookup {
             "kind": "staticlookup",
             "offset": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "bar",
@@ -962,7 +928,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -982,7 +947,6 @@ Program {
             },
             "parenthesizedExpression": true,
             "what": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -996,7 +960,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -1022,7 +985,6 @@ Program {
                 "value": "0",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "var",
@@ -1037,7 +999,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -1063,7 +1024,6 @@ Program {
               },
               "parenthesizedExpression": true,
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "var",
@@ -1078,7 +1038,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -1105,7 +1064,6 @@ Program {
               },
               "parenthesizedExpression": true,
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "var",
@@ -1120,7 +1078,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -1150,7 +1107,6 @@ Program {
       "expression": StaticLookup {
         "kind": "staticlookup",
         "offset": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "wrap",
@@ -1164,7 +1120,6 @@ Program {
                 "name": "resource",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "this",
@@ -1194,18 +1149,15 @@ Program {
       "expression": StaticLookup {
         "kind": "staticlookup",
         "offset": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "property",
           },
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
@@ -1217,18 +1169,15 @@ Program {
       "expression": StaticLookup {
         "kind": "staticlookup",
         "offset": Variable {
-          "byref": false,
           "curly": true,
           "kind": "variable",
           "name": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "property",
           },
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
@@ -1240,18 +1189,15 @@ Program {
       "expression": PropertyLookup {
         "kind": "propertylookup",
         "offset": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "property",
           },
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -1262,17 +1208,16 @@ Program {
     ExpressionStatement {
       "expression": PropertyLookup {
         "kind": "propertylookup",
-        "offset": Literal {
-          "kind": "literal",
-          "value": Variable {
-            "byref": false,
+        "offset": Variable {
+          "curly": true,
+          "kind": "variable",
+          "name": Variable {
             "curly": false,
             "kind": "variable",
             "name": "property",
           },
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -1292,24 +1237,23 @@ Program {
     ExpressionStatement {
       "expression": PropertyLookup {
         "kind": "propertylookup",
-        "offset": Literal {
-          "kind": "literal",
-          "value": PropertyLookup {
+        "offset": EncapsedPart {
+          "curly": true,
+          "expression": PropertyLookup {
             "kind": "propertylookup",
             "offset": Identifier {
               "kind": "identifier",
               "name": "foo",
             },
             "what": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "property",
             },
           },
+          "kind": "encapsedpart",
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -1320,17 +1264,16 @@ Program {
     ExpressionStatement {
       "expression": PropertyLookup {
         "kind": "propertylookup",
-        "offset": Literal {
-          "kind": "literal",
-          "value": Variable {
-            "byref": false,
+        "offset": Variable {
+          "curly": true,
+          "kind": "variable",
+          "name": Variable {
             "curly": false,
             "kind": "variable",
             "name": "property",
           },
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -1349,16 +1292,18 @@ Program {
               "kind": "identifier",
               "name": "foo_",
             },
-            Variable {
-              "byref": false,
-              "curly": false,
-              "kind": "variable",
-              "name": "property",
+            EncapsedPart {
+              "curly": true,
+              "expression": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "property",
+              },
+              "kind": "encapsedpart",
             },
           ],
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -1378,11 +1323,9 @@ Program {
     Global {
       "items": Array [
         Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "foo",
@@ -1404,23 +1347,18 @@ Program {
       "expression": StaticLookup {
         "kind": "staticlookup",
         "offset": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "property",
@@ -1432,7 +1370,6 @@ Program {
         "what": Call {
           "arguments": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",

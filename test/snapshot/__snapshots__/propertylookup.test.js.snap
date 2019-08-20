@@ -14,7 +14,6 @@ Program {
             "name": "call",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "obj",
@@ -35,9 +34,9 @@ Program {
     ExpressionStatement {
       "expression": PropertyLookup {
         "kind": "propertylookup",
-        "offset": Literal {
-          "kind": "literal",
-          "value": Identifier {
+        "offset": EncapsedPart {
+          "curly": true,
+          "expression": Identifier {
             "kind": "identifier",
             "name": ClassReference {
               "kind": "classreference",
@@ -45,9 +44,9 @@ Program {
               "resolution": "uqn",
             },
           },
+          "kind": "encapsedpart",
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "this",
@@ -63,7 +62,6 @@ Program {
           "name": "bar",
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "this",
@@ -94,7 +92,6 @@ Program {
             "name": "property_1",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "obj",
@@ -120,7 +117,6 @@ Program {
           "name": "property",
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "obj",
@@ -141,13 +137,11 @@ Program {
       "expression": PropertyLookup {
         "kind": "propertylookup",
         "offset": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "property",
         },
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "obj",

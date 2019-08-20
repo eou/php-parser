@@ -300,7 +300,7 @@ module.exports = {
       // check if contains at least one assignment statement
       let hasItem = false;
       for (let i = 0; i < assignList.length; i++) {
-        if (assignList[i] !== null) {
+        if (assignList[i] !== null && assignList[i].kind !== "noop") {
           hasItem = true;
           break;
         }
@@ -335,16 +335,10 @@ module.exports = {
 
     switch (this.token) {
       case this.tok.T_INC:
-        return this.node("pre")(
-          "+",
-          this.next().read_variable(false, false, false)
-        );
+        return this.node("pre")("+", this.next().read_variable(false, false));
 
       case this.tok.T_DEC:
-        return this.node("pre")(
-          "-",
-          this.next().read_variable(false, false, false)
-        );
+        return this.node("pre")("-", this.next().read_variable(false, false));
 
       case this.tok.T_NEW:
         return this.read_new_expr();
@@ -480,7 +474,12 @@ module.exports = {
     // Four scalar types: boolean, integer, float (floating-point number, aka double), string
     if (this.is("VARIABLE")) {
       result = this.node();
+<<<<<<< HEAD
       expr = this.read_variable(false, false, false);   // read the variable in the left of expression
+=======
+      expr = this.read_variable(false, false);
+
+>>>>>>> d95c471c9bdd58a0495e7a9c20b7d07e8f6ac8f7
       // https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L877
       // should accept only a variable
       const isConst =
@@ -495,11 +494,19 @@ module.exports = {
           prev = this.next().prev;
           op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
           let right;
+<<<<<<< HEAD
           if (this.token == "&") {
+=======
+          if (this.next().token == "&") {
+            right = this.node("byref");
+>>>>>>> d95c471c9bdd58a0495e7a9c20b7d07e8f6ac8f7
             if (this.next().token === this.tok.T_NEW) {
-              right = this.read_new_expr();
+              if (this.php7) {
+                this.error();
+              }
+              right = right(this.read_new_expr());
             } else {
-              right = this.read_variable(false, false, true);
+              right = right(this.read_variable(false, false));
             }
           } else {
             right = this.read_expr();
@@ -709,7 +716,7 @@ module.exports = {
       }
       return result;
     } else if (this.is("VARIABLE")) {
-      return this.read_variable(true, false, false);
+      return this.read_variable(true, false);
     } else {
       this.expect([this.tok.T_STRING, "VARIABLE"]);
     }

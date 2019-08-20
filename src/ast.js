@@ -14,6 +14,7 @@ const Position = require("./ast/position");
  * - [Location](#location)
  * - [Position](#position)
  * - [Node](#node)
+ *   - [Noop](#noop)
  *   - [StaticVariable](#staticvariable)
  *   - [EncapsedPart](#encapsedpart)
  *   - [Constant](#constant)
@@ -34,6 +35,7 @@ const Position = require("./ast/position");
  *   - [Expression](#expression)
  *     - [Entry](#entry)
  *     - [Closure](#closure)
+ *     - [ByRef](#byref)
  *     - [Silent](#silent)
  *     - [RetIf](#retif)
  *     - [New](#new)
@@ -354,9 +356,6 @@ AST.prototype.prepare = function(kind, docs, parser) {
     let location = null;
     const args = Array.prototype.slice.call(arguments);   // transform args into an array object
     args.push(docs);
-    if (typeof result.preBuild === "function") {
-      result.preBuild(arguments);
-    }
     if (self.withPositions || self.withSource) {
       let src = null;
       if (self.withSource) {
@@ -410,13 +409,6 @@ AST.prototype.prepare = function(kind, docs, parser) {
     result.stackUid = AST.stackUid;
   }
 
-  /**
-   * Helper to change a node kind
-   * @param {String} newKind
-   */
-  result.setKind = function(newKind) {
-    kind = newKind;
-  };
   /**
    * Sets a list of trailing comments
    * @param {*} docs
@@ -472,6 +464,7 @@ AST.prototype.checkNodes = function() {
   require("./ast/block"),
   require("./ast/boolean"),
   require("./ast/break"),
+  require("./ast/byref"),
   require("./ast/call"),
   require("./ast/case"),
   require("./ast/cast"),
@@ -522,6 +515,7 @@ AST.prototype.checkNodes = function() {
   require("./ast/namespace"),
   require("./ast/new"),
   require("./ast/node"),
+  require("./ast/noop"),
   require("./ast/nowdoc"),
   require("./ast/number"),
   require("./ast/offsetlookup"),

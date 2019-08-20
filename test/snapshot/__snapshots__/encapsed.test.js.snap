@@ -35,7 +35,6 @@ Program {
                   "name": "property",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "obj",
@@ -89,7 +88,6 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -146,7 +144,6 @@ Program {
                 "name": "koolaid1",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "array",
@@ -204,7 +201,6 @@ Program {
                 "value": "0",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "array",
@@ -265,7 +261,6 @@ Program {
                 "value": "key",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "array",
@@ -323,7 +318,6 @@ Program {
                 "value": "0",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "array",
@@ -387,7 +381,6 @@ Program {
                   "value": "4",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "array",
@@ -456,7 +449,6 @@ Program {
                   },
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "arr",
@@ -524,7 +516,6 @@ Program {
                   "value": "foo",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "arr",
@@ -583,7 +574,6 @@ Program {
                 "name": "property",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "obj",
@@ -641,7 +631,6 @@ Program {
                 "name": "property",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "obj",
@@ -711,7 +700,6 @@ Program {
                     "name": "values",
                   },
                   "what": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "obj",
@@ -766,24 +754,23 @@ Program {
             "curly": true,
             "expression": PropertyLookup {
               "kind": "propertylookup",
-              "offset": Literal {
-                "kind": "literal",
-                "value": OffsetLookup {
+              "offset": EncapsedPart {
+                "curly": true,
+                "expression": OffsetLookup {
                   "kind": "offsetlookup",
                   "offset": Number {
                     "kind": "number",
                     "value": "1",
                   },
                   "what": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "array",
                   },
                 },
+                "kind": "encapsedpart",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "obj",
@@ -837,13 +824,11 @@ Program {
             "expression": PropertyLookup {
               "kind": "propertylookup",
               "offset": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "var",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "obj",
@@ -907,7 +892,6 @@ Program {
                   "name": "foo",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "var",
@@ -978,7 +962,6 @@ Program {
                       "name": "call",
                     },
                     "what": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "obj",
@@ -1042,7 +1025,6 @@ Program {
                   "name": "call",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "obj",
@@ -1097,7 +1079,6 @@ Program {
             "expression": StaticLookup {
               "kind": "staticlookup",
               "offset": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "var",
@@ -1105,13 +1086,11 @@ Program {
               "what": StaticLookup {
                 "kind": "staticlookup",
                 "offset": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "var",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "obj",
@@ -1166,7 +1145,6 @@ Program {
             "expression": StaticLookup {
               "kind": "staticlookup",
               "offset": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "foo",
@@ -1174,7 +1152,6 @@ Program {
               "what": StaticLookup {
                 "kind": "staticlookup",
                 "offset": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "bar",
@@ -1182,7 +1159,6 @@ Program {
                 "what": StaticLookup {
                   "kind": "staticlookup",
                   "offset": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "foobar",
@@ -1190,7 +1166,6 @@ Program {
                   "what": StaticLookup {
                     "kind": "staticlookup",
                     "offset": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "foo",
@@ -1198,7 +1173,6 @@ Program {
                     "what": StaticLookup {
                       "kind": "staticlookup",
                       "offset": Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "name": "bar",
@@ -1206,7 +1180,6 @@ Program {
                       "what": StaticLookup {
                         "kind": "staticlookup",
                         "offset": Variable {
-                          "byref": false,
                           "curly": false,
                           "kind": "variable",
                           "name": "foobar",
@@ -1214,7 +1187,6 @@ Program {
                         "what": StaticLookup {
                           "kind": "staticlookup",
                           "offset": Variable {
-                            "byref": false,
                             "curly": false,
                             "kind": "variable",
                             "name": "bar",
@@ -1222,7 +1194,6 @@ Program {
                           "what": StaticLookup {
                             "kind": "staticlookup",
                             "offset": Variable {
-                              "byref": false,
                               "curly": false,
                               "kind": "variable",
                               "name": "foo",
@@ -1230,7 +1201,6 @@ Program {
                             "what": StaticLookup {
                               "kind": "staticlookup",
                               "offset": Variable {
-                                "byref": false,
                                 "curly": false,
                                 "kind": "variable",
                                 "name": "binary",
@@ -1238,7 +1208,6 @@ Program {
                               "what": StaticLookup {
                                 "kind": "staticlookup",
                                 "offset": Variable {
-                                  "byref": false,
                                   "curly": false,
                                   "kind": "variable",
                                   "name": "resource",
@@ -1246,13 +1215,11 @@ Program {
                                 "what": StaticLookup {
                                   "kind": "staticlookup",
                                   "offset": Variable {
-                                    "byref": false,
                                     "curly": false,
                                     "kind": "variable",
                                     "name": "target",
                                   },
                                   "what": Variable {
-                                    "byref": false,
                                     "curly": false,
                                     "kind": "variable",
                                     "name": "var",
@@ -1316,13 +1283,11 @@ Program {
             "expression": StaticLookup {
               "kind": "staticlookup",
               "offset": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "var",
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "obj",
@@ -1374,7 +1339,6 @@ Program {
           EncapsedPart {
             "curly": false,
             "expression": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -1395,7 +1359,6 @@ Program {
           EncapsedPart {
             "curly": false,
             "expression": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -1446,11 +1409,9 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": true,
               "kind": "variable",
               "name": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "name",
@@ -1502,7 +1463,6 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": true,
               "kind": "variable",
               "name": Call {
@@ -1561,7 +1521,6 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": true,
               "kind": "variable",
               "name": PropertyLookup {
@@ -1571,7 +1530,6 @@ Program {
                   "name": "property",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "obj",
@@ -1624,7 +1582,6 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": true,
               "kind": "variable",
               "name": Call {
@@ -1637,7 +1594,6 @@ Program {
                     "name": "call",
                   },
                   "what": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "obj",
@@ -1691,19 +1647,16 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": true,
               "kind": "variable",
               "name": StaticLookup {
                 "kind": "staticlookup",
                 "offset": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "var",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "obj",
@@ -1756,7 +1709,6 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": true,
               "kind": "variable",
               "name": Call {
@@ -1769,7 +1721,6 @@ Program {
                     "name": "call",
                   },
                   "what": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "obj",
@@ -1823,7 +1774,6 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": true,
               "kind": "variable",
               "name": Call {
@@ -1882,7 +1832,6 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -1933,7 +1882,6 @@ Program {
           EncapsedPart {
             "curly": false,
             "expression": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -1984,7 +1932,6 @@ Program {
           EncapsedPart {
             "curly": false,
             "expression": Variable {
-              "byref": false,
               "curly": true,
               "kind": "variable",
               "name": "var",
@@ -2035,7 +1982,6 @@ Program {
           EncapsedPart {
             "curly": true,
             "expression": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -2086,7 +2032,6 @@ Program {
           EncapsedPart {
             "curly": false,
             "expression": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",

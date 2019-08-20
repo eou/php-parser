@@ -39,14 +39,6 @@ module.exports = {
     if (this.token !== expect) {
       items = this.read_array_pair_list(shortForm);
     }
-    // check non empty entries
-    /*for(let i = 0, size = items.length - 1; i < size; i++) {
-      if (items[i] === null) {
-        this.raiseError(
-          "Cannot use empty array elements in arrays"
-        );
-      }
-    }*/
     this.expect(expect);
     this.next();
     let array_node = result(shortForm, items);
@@ -86,7 +78,7 @@ module.exports = {
       (!shortForm && this.token === ")") ||
       (shortForm && this.token === "]")
     ) {
-      return null;
+      return this.node("noop")();
     }
 
     var Position = require("../ast/position.js");
@@ -94,6 +86,7 @@ module.exports = {
     let seperator = { loc: new Position(), sign: null };
 
     if (this.token === "&") {
+<<<<<<< HEAD
       let refVar_node = this.next().read_variable(true, false, true);
       seperator.sign = this.token;
       seperator.loc.line = this.lexer.yylloc.last_line;
@@ -101,6 +94,9 @@ module.exports = {
       seperator.loc.offset = this.lexer.offset;
       refVar_node.seperator = seperator;
       return refVar_node;
+=======
+      return this.node("byref")(this.next().read_variable(true, false));
+>>>>>>> d95c471c9bdd58a0495e7a9c20b7d07e8f6ac8f7
     } else {
       const entry = this.node(ArrayEntry);
       const expr = this.read_expr();
@@ -109,6 +105,7 @@ module.exports = {
         arrowLoc.line = this.lexer.yylloc.last_line;
         arrowLoc.column = this.lexer.yylloc.last_column;
         if (this.next().token === "&") {
+<<<<<<< HEAD
           let entry_node = entry(expr, this.next().read_variable(true, false, true));
           entry_node.arrowLoc = new Position();
           entry_node.arrowLoc = arrowLoc;
@@ -118,6 +115,12 @@ module.exports = {
           seperator.loc.offset = this.lexer.offset;
           entry_node.seperator = seperator;
           return entry_node;
+=======
+          return entry(
+            expr,
+            this.node("byref")(this.next().read_variable(true, false))
+          );
+>>>>>>> d95c471c9bdd58a0495e7a9c20b7d07e8f6ac8f7
         } else {
           let entry_node = entry(expr, this.read_expr());
           entry_node.arrowLoc = new Position();
@@ -129,6 +132,8 @@ module.exports = {
           entry_node.seperator = seperator;
           return entry_node;
         }
+      } else {
+        entry.destroy();
       }
       
       seperator.sign = this.token;
@@ -138,14 +143,5 @@ module.exports = {
       expr.seperator = seperator;
       return expr;
     }
-  },
-  /**
-   * ```ebnf
-   *  dim_offset ::= expr?
-   * ```
-   */
-  read_dim_offset: function() {
-    if (this.token == "]") return false;
-    return this.read_expr();
   }
 };

@@ -22,18 +22,17 @@ module.exports = {
    *  $var->func()->property    // chained calls
    * ```
    */
-  read_variable: function(read_only, encapsed, byref) {
+  read_variable: function(read_only, encapsed) {
     let result;
 
     // check the byref flag
-    if (!byref && this.token === "&") {
-      byref = true;
-      this.next();
+    if (this.token === "&") {
+      return this.node("byref")(this.next().read_variable(read_only, encapsed));
     }
 
     // reads the entry point
     if (this.is([this.tok.T_VARIABLE, "$"])) {
-      result = this.read_reference_variable(encapsed, byref);
+      result = this.read_reference_variable(encapsed);
     } else if (
       this.is([
         this.tok.T_NS_SEPARATOR,
@@ -85,7 +84,7 @@ module.exports = {
     const result = this.node("staticlookup");
     let offset, name;
     if (this.next().is([this.tok.T_VARIABLE, "$"])) {
-      offset = this.read_reference_variable(encapsed, false);
+      offset = this.read_reference_variable(encapsed);
     } else if (
       this.token === this.tok.T_STRING ||
       this.token === this.tok.T_CLASS ||
@@ -131,7 +130,7 @@ module.exports = {
           name = this.text().substring(1);
           this.next();
           what = this.node("encapsed")(
-            [what, inner(name, false, false)],
+            [what, inner(name, false)],
             null,
             "offset"
           );
@@ -139,9 +138,15 @@ module.exports = {
             what.loc.start = what.value[0].loc.start;
           }
         } else if (this.token === "{") {
+          // EncapsedPart
+          const part = this.node("encapsedpart");
           const expr = this.next().read_expr();
           this.expect("}") && this.next();
-          what = this.node("encapsed")([what, expr], null, "offset");
+          what = this.node("encapsed")(
+            [what, part(expr, true)],
+            null,
+            "offset"
+          );
           if (what.loc && what.value[0].loc) {
             what.loc.start = what.value[0].loc.start;
           }
@@ -151,7 +156,7 @@ module.exports = {
         what = this.node("variable");
         name = this.text().substring(1);
         this.next();
-        what = what(name, false, false);
+        what = what(name, false);
         break;
       case "$":
         what = this.node();
@@ -160,18 +165,18 @@ module.exports = {
           // $obj->${$varname}
           name = this.next().read_expr();
           this.expect("}") && this.next();
-          what = what("literal", "literal", name, null);
+          what = what("variable", name, true);
         } else {
           // $obj->$$varname
           name = this.read_expr();
-          what = what("variable", name, false, false);
+          what = what("variable", name, false);
         }
         break;
       case "{":
-        what = this.node("literal");
+        what = this.node("encapsedpart");
         name = this.next().read_expr();
         this.expect("}") && this.next();
-        what = what("literal", name, null);
+        what = what(name, true);
         break;
       default:
         this.error([this.tok.T_STRING, this.tok.T_VARIABLE, "$", "{"]);
@@ -264,7 +269,7 @@ module.exports = {
     } else if (this.token === this.tok.T_VARIABLE) {
       const name = this.text().substring(1);
       this.next();
-      offset = offset("variable", name, false, false);
+      offset = offset("variable", name, false);
     } else {
       this.expect([
         this.tok.T_STRING,
@@ -289,22 +294,11 @@ module.exports = {
    *  $foo[123]{1};   // gets the 2nd char from the 123 array entry
    * </code>
    */
-  read_reference_variable: function(encapsed, byref) {
-    let result = this.read_simple_variable(byref);
+  read_reference_variable: function(encapsed) {
+    let result = this.read_simple_variable();
     let offset;
     while (this.token != this.EOF) {
       const node = this.node();
-      /*
-      if (this.token == "[") {
-        offset = null;
-        if (encapsed) {
-          offset = this.next().read_encaps_var_offset();
-        } else {
-          offset = this.next().token === "]" ? null : this.read_dim_offset();
-        }
-        this.expect("]") && this.next();
-        result = node("offsetlookup", result, offset);
-      } else */
       if (this.token == "{" && !encapsed) {
         // @fixme check coverage, not sure thats working
         offset = this.next().read_expr();
@@ -322,7 +316,7 @@ module.exports = {
    *  simple_variable ::= T_VARIABLE | '$' '{' expr '}' | '$' simple_variable
    * ```
    */
-  read_simple_variable: function(byref) {
+  read_simple_variable: function() {
     let result = this.node("variable");
     let name;
     if (
@@ -332,7 +326,7 @@ module.exports = {
       // plain variable name
       name = this.text().substring(1);
       this.next();
-      result = result(name, byref, false);
+      result = result(name, false);
     } else {
       if (this.token === "$") this.next();
       // dynamic variable name
@@ -340,19 +334,19 @@ module.exports = {
         case "{": {
           const expr = this.next().read_expr();
           this.expect("}") && this.next();
-          result = result(expr, byref, true);
+          result = result(expr, true);
           break;
         }
         case "$": // $$$var
           // @fixme check coverage here
-          result = result(this.read_simple_variable(false), byref, false);
+          result = result(this.read_simple_variable(), false);
           break;
         case this.tok.T_VARIABLE: {
           // $$var
           name = this.text().substring(1);
           const node = this.node("variable");
           this.next();
-          result = result(node(name, false, false), byref, false);
+          result = result(node(name, false), false);
           break;
         }
         default:
@@ -360,7 +354,7 @@ module.exports = {
           // graceful mode
           name = this.text();
           this.next();
-          result = result(name, byref, false);
+          result = result(name, false);
       }
     }
     return result;

@@ -201,6 +201,30 @@ Program {
 }
 `;
 
+exports[`Function tests test arrow function php 7.4 1`] = `
+Program {
+  "children": Array [
+    _Function {
+      "arguments": Array [],
+      "body": Block {
+        "children": Array [],
+        "kind": "block",
+      },
+      "byref": false,
+      "kind": "function",
+      "name": Identifier {
+        "kind": "identifier",
+        "name": false,
+      },
+      "nullable": false,
+      "type": null,
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
 exports[`Function tests test function parsing 1`] = `
 Program {
   "children": Array [
@@ -275,7 +299,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -319,14 +342,15 @@ Program {
             "raw": "array",
           },
           "uses": Array [
-            Variable {
-              "byref": true,
-              "curly": false,
-              "kind": "variable",
-              "name": "c",
+            ByRef {
+              "kind": "byref",
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "c",
+              },
             },
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "d",
@@ -340,7 +364,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "b",
@@ -437,7 +460,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -472,7 +494,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "b",
@@ -502,7 +523,6 @@ Program {
               },
             },
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "a",
