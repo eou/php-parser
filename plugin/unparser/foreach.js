@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2018 Glayzzle (BSD3 License)
- * @authors https://github.com/eou/php-parser
+ * @authors https://github.com/tharzen/php-parser
  */
 "use strict";
 
