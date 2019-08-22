@@ -474,12 +474,8 @@ module.exports = {
     // Four scalar types: boolean, integer, float (floating-point number, aka double), string
     if (this.is("VARIABLE")) {
       result = this.node();
-<<<<<<< HEAD
-      expr = this.read_variable(false, false, false);   // read the variable in the left of expression
-=======
       expr = this.read_variable(false, false);
 
->>>>>>> d95c471c9bdd58a0495e7a9c20b7d07e8f6ac8f7
       // https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L877
       // should accept only a variable
       const isConst =
@@ -494,12 +490,8 @@ module.exports = {
           prev = this.next().prev;
           op.startLoc = new Position(prev[0], prev[1] - 1, prev[2] - 1);
           let right;
-<<<<<<< HEAD
           if (this.token == "&") {
-=======
-          if (this.next().token == "&") {
             right = this.node("byref");
->>>>>>> d95c471c9bdd58a0495e7a9c20b7d07e8f6ac8f7
             if (this.next().token === this.tok.T_NEW) {
               if (this.php7) {
                 this.error();

@@ -4,99 +4,44 @@ Program {
    Location {
      source: null,
      start: Position { line: 1, column: 0, offset: 0 },
-     end: Position { line: 11, column: 0, offset: 68 } },
+     end: Position { line: 4, column: 0, offset: 15 } },
   children:
-   [ Foreach {
-       kind: 'foreach',
+   [ ExpressionStatement {
+       kind: 'expressionstatement',
        loc:
         Location {
           source: null,
           start: Position { line: 3, column: 0, offset: 7 },
-          end: Position { line: 10, column: 1, offset: 67 },
-          leftParLoc: Position { line: 4, column: 0, offset: 17 },
-          rightParLoc: Position { line: 7, column: 0, offset: 46 },
-          asLoc: Position { line: 5, column: 0, offset: 25 },
-          arrowLoc: Position { line: 6, column: 0, offset: 36 } },
-       source:
-        Variable {
-          kind: 'variable',
+          end: Position { line: 3, column: 7, offset: 14 } },
+       expression:
+        Assign {
+          kind: 'assign',
           loc:
            Location {
              source: null,
-             start: Position { line: 4, column: 1, offset: 17 },
-             end: Position { line: 4, column: 5, offset: 21 } },
-          name: 'arr',
-          byref: false,
-          curly: false },
-       key:
-        Variable {
-          kind: 'variable',
-          loc:
-           Location {
-             source: null,
-             start: Position { line: 5, column: 5, offset: 28 },
-             end: Position { line: 5, column: 9, offset: 32 } },
-          name: 'key',
-          byref: false,
-          curly: false },
-       value:
-        Variable {
-          kind: 'variable',
-          loc:
-           Location {
-             source: null,
-             start: Position { line: 6, column: 4, offset: 38 },
-             end: Position { line: 6, column: 10, offset: 44 } },
-          name: 'value',
-          byref: false,
-          curly: false },
-       shortForm: false,
-       body:
-        Block {
-          kind: 'block',
-          loc:
-           Location {
-             source: null,
-             start: Position { line: 7, column: 2, offset: 47 },
-             end: Position { line: 10, column: 1, offset: 67 } },
-          children:
-           [ ExpressionStatement {
-               kind: 'expressionstatement',
-               loc:
-                Location {
-                  source: null,
-                  start: Position { line: 9, column: 0, offset: 56 },
-                  end: Position { line: 9, column: 9, offset: 65 } },
-               expression:
-                Assign {
-                  kind: 'assign',
-                  loc:
-                   Location {
-                     source: null,
-                     start: Position { line: 9, column: 0, offset: 56 },
-                     end: Position { line: 9, column: 9, offset: 65 },
-                     last: Position { line: 9, column: 8, offset: 64 } },
-                  operator:
-                   { startLoc: Position { line: 9, column: 5, offset: 61 },
-                     sign: '=' },
-                  left:
-                   Variable {
-                     kind: 'variable',
-                     loc:
-                      Location {
-                        source: null,
-                        start: Position { line: 9, column: 0, offset: 56 },
-                        end: Position { line: 9, column: 4, offset: 60 } },
-                     name: 'arr',
-                     byref: false,
-                     curly: false },
-                  right:
-                   Number {
-                     kind: 'number',
-                     loc:
-                      Location {
-                        source: null,
-                        start: Position { line: 9, column: 7, offset: 63 },
-                        end: Position { line: 9, column: 8, offset: 64 } },
-                     value: '1' } } } ] } } ],
+             start: Position { line: 3, column: 0, offset: 7 },
+             end: Position { line: 3, column: 7, offset: 14 },
+             last: Position { line: 3, column: 6, offset: 13 } },
+          operator:
+           { startLoc: Position { line: 3, column: 3, offset: 10 },
+             sign: '=' },
+          left:
+           Variable {
+             kind: 'variable',
+             loc:
+              Location {
+                source: null,
+                start: Position { line: 3, column: 0, offset: 7 },
+                end: Position { line: 3, column: 2, offset: 9 } },
+             name: 'a',
+             curly: false },
+          right:
+           Number {
+             kind: 'number',
+             loc:
+              Location {
+                source: null,
+                start: Position { line: 3, column: 5, offset: 12 },
+                end: Position { line: 3, column: 6, offset: 13 } },
+             value: '1' } } } ],
   errors: [] }

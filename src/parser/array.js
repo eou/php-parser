@@ -86,17 +86,13 @@ module.exports = {
     let seperator = { loc: new Position(), sign: null };
 
     if (this.token === "&") {
-<<<<<<< HEAD
-      let refVar_node = this.next().read_variable(true, false, true);
+      let refVar_node =  this.node("byref")(this.next().read_variable(true, false));
       seperator.sign = this.token;
       seperator.loc.line = this.lexer.yylloc.last_line;
       seperator.loc.column = this.lexer.yylloc.last_column;
       seperator.loc.offset = this.lexer.offset;
       refVar_node.seperator = seperator;
       return refVar_node;
-=======
-      return this.node("byref")(this.next().read_variable(true, false));
->>>>>>> d95c471c9bdd58a0495e7a9c20b7d07e8f6ac8f7
     } else {
       const entry = this.node(ArrayEntry);
       const expr = this.read_expr();
@@ -105,8 +101,7 @@ module.exports = {
         arrowLoc.line = this.lexer.yylloc.last_line;
         arrowLoc.column = this.lexer.yylloc.last_column;
         if (this.next().token === "&") {
-<<<<<<< HEAD
-          let entry_node = entry(expr, this.next().read_variable(true, false, true));
+          let entry_node = entry(expr, this.node("byref")(this.next().read_variable(true, false)));
           entry_node.arrowLoc = new Position();
           entry_node.arrowLoc = arrowLoc;
           seperator.sign = this.token;
@@ -115,12 +110,6 @@ module.exports = {
           seperator.loc.offset = this.lexer.offset;
           entry_node.seperator = seperator;
           return entry_node;
-=======
-          return entry(
-            expr,
-            this.node("byref")(this.next().read_variable(true, false))
-          );
->>>>>>> d95c471c9bdd58a0495e7a9c20b7d07e8f6ac8f7
         } else {
           let entry_node = entry(expr, this.read_expr());
           entry_node.arrowLoc = new Position();
