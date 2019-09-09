@@ -1,10 +1,12 @@
-# Development Notes
+# Development Instruction
+
+A general guidence for developing plugins based on this php-parser.
 
 ## Structure
 
-- `lexer.js` tokenizes the string for helping the parser to build the AST from its grammar.
-- `parser.js` builds the AST tree from the lexer.
-- `ast.js` provides the visualization of the AST structure (You can see the AST as a DOM document). 
+- `src/lexer.js` tokenizes the string for helping the parser to build the AST from its grammar.
+- `src/parser.js` builds the AST tree from the lexer.
+- `src/ast.js` provides the visualization of the AST structure (You can see the AST as a DOM document). 
   - `/src/ast/node.js` defines generic AST node type.
 
 ---
@@ -21,8 +23,10 @@ var parser = new engine({
   lexter: {},
 });
 
+// read php file
 var phpFile = fs.readFileSync(__dirname + "/myTest.php");
-console.log(parser.parseCode(phpFile));
+// parse php
+parser.parseCode(phpFile)
 ```
 
 `parser.parseCode()` actually calls `parser.parse()` in `src/parser.js`.
@@ -73,7 +77,7 @@ The `read_start()` defines in `src/parser/main.js`. It returns every current top
 
 ```php
 <?php
-  $a = 10;
+  $a = 1;
 ?>
 ```
 
@@ -93,7 +97,7 @@ The `read_start()` defines in `src/parser/main.js`. It returns every current top
       }
     }
     ```
-8. `parser/statement.js`: 
+8. `parser/statement.js`:
     ```javascript
     read_top_statement: function() {
       switch (this.token) {
@@ -162,3 +166,4 @@ The `read_start()` defines in `src/parser/main.js`. It returns every current top
       }
     }
     ```
+12. Parse the `$a` and `1`, and then combine them into assign AST node.
