@@ -6,7 +6,8 @@ It aims to restore PHP code that uses the **original code style format** from AS
 
 ---
 
-### Usage
+## Usage
+
 ```javascript
 var engine = require("../src/index");
 var unparser = require("../plugin/unparser");
@@ -105,7 +106,7 @@ const Position = function(line, column, offset) {
 };
 ```
 
-### Add operator location in AST
+## Add operator location in AST
 
 Need to modify source codes of `php-parser` to show position of each operator.
 
@@ -237,7 +238,6 @@ The node unparser is `unparser.prototype.unparseNode`. It will unparse different
 `retif`:
 
 44. `? :`
-
 
 ## Contribute
 😶[Harry](https://github.com/eou)

@@ -522,6 +522,7 @@ AST.prototype.checkNodes = function() {
   require("./ast/operation"),
   require("./ast/parameter"),
   require("./ast/parentreference"),
+  require("./ast/phpopentag"),
   require("./ast/post"),
   require("./ast/pre"),
   require("./ast/print"),

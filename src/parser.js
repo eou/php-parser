@@ -36,7 +36,7 @@ const parser = function(lexer, ast) {
   this.php7 = true;
   this.php74 = true;
   this.extractDoc = false;
-  this.extractTokens = false;
+  this.extractTokens = true;
   this.suppressErrors = false;
   const mapIt = function(item) {
     return [item, null];
@@ -276,7 +276,7 @@ parser.prototype.parse = function(code, filename) {
   this.innerListForm = false;
   const program = this.node("program");
   let childs = [];
-  this.next();  // consume the next token, such as $a
+  this.next();
   while (this.token != this.EOF) {
     const node = this.read_start();   // /paser/main.js, start from a namespace or statement
     // var util = require('util');
@@ -556,7 +556,7 @@ parser.prototype.next = function() {
 
   // eating the token
   this.lex();
-
+  
   // showing the debug
   if (this.debug) {
     this.showlog();
@@ -609,9 +609,19 @@ parser.prototype.lex = function() {
         ];
       }
       this._tokens.push(entry);
+      /**
+       * Great place to get all tokens:
+       * [ 'T_OPEN_TAG', '<?php ', 1, 0, 6 ]
+       * [ 'T_WHITESPACE', '\n', 1, 6, 7 ]
+       * [ 'T_VARIABLE', '$c', 2, 7, 9 ]
+       * [ null, ';', 2, 9, 10 ]
+       * [ 'T_WHITESPACE', '\n', 2, 10, 11]
+       * ...
+       */
+      // console.log(entry);
       if (this.token === this.tok.T_CLOSE_TAG) {
         // https://github.com/php/php-src/blob/7ff186434e82ee7be7c59d0db9a976641cf7b09c/Zend/zend_compile.c#L1680
-        this.token = ";";
+        // this.token = ";";
         return this;
       } else if (this.token === this.tok.T_OPEN_TAG_WITH_ECHO) {
         this.token = this.tok.T_ECHO;
@@ -621,9 +631,9 @@ parser.prototype.lex = function() {
       this.token === this.tok.T_WHITESPACE || // ignore white space
       (!this.extractDoc &&
         (this.token === this.tok.T_COMMENT || // ignore single lines comments
-          this.token === this.tok.T_DOC_COMMENT)) || // ignore doc comments
+          this.token === this.tok.T_DOC_COMMENT)) // ignore doc comments
       // ignore open tags
-      this.token === this.tok.T_OPEN_TAG
+      // || this.token === this.tok.T_OPEN_TAG
     );
   } else {
     this.token = this.lexer.lex() || this.EOF;    // lexer.lex() return next match that has a token

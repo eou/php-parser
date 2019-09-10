@@ -121,7 +121,7 @@ engine.parseEval = function(buffer, options) {
  */
 engine.prototype.parseEval = function(buffer) {
   this.lexer.mode_eval = true;
-  this.lexer.all_tokens = false;
+  this.lexer.all_tokens = true;
   buffer = getStringBuffer(buffer);
   return this.parser.parse(buffer, "eval");
 };
@@ -162,7 +162,7 @@ engine.parseCode = function(buffer, filename, options) {
  */
 engine.prototype.parseCode = function(buffer, filename) {
   this.lexer.mode_eval = false;
-  this.lexer.all_tokens = false;
+  this.lexer.all_tokens = true;
   buffer = getStringBuffer(buffer);
   return this.parser.parse(buffer, filename);
 };

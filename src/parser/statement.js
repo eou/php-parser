@@ -14,7 +14,7 @@ module.exports = {
    */
   read_top_statements: function() {
     let result = [];
-    while (this.token !== this.EOF && this.token !== "}") {
+    while (this.token !== this.EOF && this.token !== "}" && this.token !== this.tok.T_CLOSE_TAG) {
       const statement = this.read_top_statement();
       if (statement) {
         if (Array.isArray(statement)) {

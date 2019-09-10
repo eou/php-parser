@@ -4,44 +4,362 @@ Program {
    Location {
      source: null,
      start: Position { line: 1, column: 0, offset: 0 },
-     end: Position { line: 4, column: 0, offset: 15 } },
+     end: Position { line: 14, column: 7, offset: 122 } },
   children:
-   [ ExpressionStatement {
-       kind: 'expressionstatement',
+   [ Phpopentag {
+       kind: 'phpopentag',
        loc:
         Location {
           source: null,
-          start: Position { line: 3, column: 0, offset: 7 },
-          end: Position { line: 3, column: 7, offset: 14 } },
-       expression:
-        Assign {
-          kind: 'assign',
-          loc:
-           Location {
-             source: null,
-             start: Position { line: 3, column: 0, offset: 7 },
-             end: Position { line: 3, column: 7, offset: 14 },
-             last: Position { line: 3, column: 6, offset: 13 } },
-          operator:
-           { startLoc: Position { line: 3, column: 3, offset: 10 },
-             sign: '=' },
-          left:
-           Variable {
-             kind: 'variable',
-             loc:
-              Location {
-                source: null,
-                start: Position { line: 3, column: 0, offset: 7 },
-                end: Position { line: 3, column: 2, offset: 9 } },
-             name: 'a',
-             curly: false },
-          right:
-           Number {
-             kind: 'number',
-             loc:
-              Location {
-                source: null,
-                start: Position { line: 3, column: 5, offset: 12 },
-                end: Position { line: 3, column: 6, offset: 13 } },
-             value: '1' } } } ],
-  errors: [] }
+          start: Position { line: 1, column: 0, offset: 0 },
+          end: Position { line: 5, column: 2, offset: 25 } },
+       children:
+        [ Block {
+            kind: 'block',
+            loc:
+             Location {
+               source: null,
+               start: Position { line: 2, column: 0, offset: 7 },
+               end: Position { line: 4, column: 1, offset: 22 } },
+            children:
+             [ ExpressionStatement {
+                 kind: 'expressionstatement',
+                 loc:
+                  Location {
+                    source: null,
+                    start: Position { line: 3, column: 4, offset: 13 },
+                    end: Position { line: 3, column: 11, offset: 20 } },
+                 expression:
+                  Assign {
+                    kind: 'assign',
+                    loc:
+                     Location {
+                       source: null,
+                       start: Position { line: 3, column: 4, offset: 13 },
+                       end: Position { line: 3, column: 11, offset: 20 },
+                       last: Position { line: 3, column: 10, offset: 19 } },
+                    operator:
+                     { startLoc: Position { line: 3, column: 7, offset: 16 },
+                       sign: '=' },
+                    left:
+                     Variable {
+                       kind: 'variable',
+                       loc:
+                        Location {
+                          source: null,
+                          start: Position { line: 3, column: 4, offset: 13 },
+                          end: Position { line: 3, column: 6, offset: 15 } },
+                       name: 'a',
+                       curly: false },
+                    right:
+                     Number {
+                       kind: 'number',
+                       loc:
+                        Location {
+                          source: null,
+                          start: Position { line: 3, column: 9, offset: 18 },
+                          end: Position { line: 3, column: 10, offset: 19 } },
+                       value: '2' } } } ] } ],
+       closed: true,
+       errors: null },
+     Inline {
+       kind: 'inline',
+       loc:
+        Location {
+          source: null,
+          start: Position { line: 5, column: 2, offset: 25 },
+          end: Position { line: 5, column: 15, offset: 38 } },
+       value: '  <div></div>',
+       raw: '  <div></div>' },
+     Phpopentag {
+       kind: 'phpopentag',
+       loc:
+        Location {
+          source: null,
+          start: Position { line: 5, column: 15, offset: 38 },
+          end: Position { line: 5, column: 31, offset: 54 } },
+       children:
+        [ ExpressionStatement {
+            kind: 'expressionstatement',
+            loc:
+             Location {
+               source: null,
+               start: Position { line: 5, column: 21, offset: 44 },
+               end: Position { line: 5, column: 28, offset: 51 } },
+            expression:
+             Assign {
+               kind: 'assign',
+               loc:
+                Location {
+                  source: null,
+                  start: Position { line: 5, column: 21, offset: 44 },
+                  end: Position { line: 5, column: 28, offset: 51 },
+                  last: Position { line: 5, column: 27, offset: 50 } },
+               operator:
+                { startLoc: Position { line: 5, column: 24, offset: 47 },
+                  sign: '=' },
+               left:
+                Variable {
+                  kind: 'variable',
+                  loc:
+                   Location {
+                     source: null,
+                     start: Position { line: 5, column: 21, offset: 44 },
+                     end: Position { line: 5, column: 23, offset: 46 } },
+                  name: 'a',
+                  curly: false },
+               right:
+                Number {
+                  kind: 'number',
+                  loc:
+                   Location {
+                     source: null,
+                     start: Position { line: 5, column: 26, offset: 49 },
+                     end: Position { line: 5, column: 27, offset: 50 } },
+                  value: '3' } } } ],
+       closed: true,
+       errors: null },
+     Inline {
+       kind: 'inline',
+       loc:
+        Location {
+          source: null,
+          start: Position { line: 5, column: 31, offset: 54 },
+          end: Position { line: 7, column: 0, offset: 57 } },
+       value: ' \n\n',
+       raw: ' \n\n' },
+     Phpopentag {
+       kind: 'phpopentag',
+       loc:
+        Location {
+          source: null,
+          start: Position { line: 7, column: 0, offset: 57 },
+          end: Position { line: 14, column: 7, offset: 122 } },
+       children:
+        [ For {
+            kind: 'for',
+            loc:
+             Location {
+               source: null,
+               start: Position { line: 8, column: 0, offset: 64 },
+               end: Position { line: 12, column: 1, offset: 113 },
+               leftParLoc: Position { line: 8, column: 4, offset: 69 },
+               rightParLoc: Position { line: 10, column: 0, offset: 96 },
+               fstSemiColLoc: Position { line: 9, column: 10, offset: 81 },
+               sndSemiColLoc: Position { line: 9, column: 18, offset: 89 } },
+            init:
+             [ Assign {
+                 kind: 'assign',
+                 loc:
+                  Location {
+                    source: null,
+                    start: Position { line: 9, column: 4, offset: 74 },
+                    end: Position { line: 9, column: 10, offset: 80 } },
+                 operator:
+                  { startLoc: Position { line: 9, column: 7, offset: 77 },
+                    sign: '=' },
+                 left:
+                  Variable {
+                    kind: 'variable',
+                    loc:
+                     Location {
+                       source: null,
+                       start: Position { line: 9, column: 4, offset: 74 },
+                       end: Position { line: 9, column: 6, offset: 76 } },
+                    name: 'i',
+                    curly: false },
+                 right:
+                  Number {
+                    kind: 'number',
+                    loc:
+                     Location {
+                       source: null,
+                       start: Position { line: 9, column: 9, offset: 79 },
+                       end: Position { line: 9, column: 10, offset: 80 } },
+                    value: '2' } } ],
+            test:
+             [ Bin {
+                 kind: 'bin',
+                 loc:
+                  Location {
+                    source: null,
+                    start: Position { line: 9, column: 12, offset: 82 },
+                    end: Position { line: 9, column: 18, offset: 88 } },
+                 type:
+                  { startLoc: Position { line: 9, column: 15, offset: 85 },
+                    sign: '<' },
+                 left:
+                  Variable {
+                    kind: 'variable',
+                    loc:
+                     Location {
+                       source: null,
+                       start: Position { line: 9, column: 12, offset: 82 },
+                       end: Position { line: 9, column: 14, offset: 84 } },
+                    name: 'i',
+                    curly: false },
+                 right:
+                  Number {
+                    kind: 'number',
+                    loc:
+                     Location {
+                       source: null,
+                       start: Position { line: 9, column: 17, offset: 87 },
+                       end: Position { line: 9, column: 18, offset: 88 } },
+                    value: '3' } } ],
+            increment:
+             [ Post {
+                 kind: 'post',
+                 loc:
+                  Location {
+                    source: null,
+                    start: Position { line: 9, column: 20, offset: 90 },
+                    end: Position { line: 9, column: 24, offset: 94 } },
+                 type:
+                  { startLoc: Position { line: 9, column: 22, offset: 92 },
+                    sign: '+' },
+                 what:
+                  Variable {
+                    kind: 'variable',
+                    loc:
+                     Location {
+                       source: null,
+                       start: Position { line: 9, column: 20, offset: 90 },
+                       end: Position { line: 9, column: 22, offset: 92 } },
+                    name: 'i',
+                    curly: false } } ],
+            shortForm: false,
+            body:
+             Block {
+               kind: 'block',
+               loc:
+                Location {
+                  source: null,
+                  start: Position { line: 10, column: 2, offset: 97 },
+                  end: Position { line: 12, column: 1, offset: 113 } },
+               children:
+                [ Echo {
+                    kind: 'echo',
+                    loc:
+                     Location {
+                       source: null,
+                       start: Position { line: 11, column: 4, offset: 103 },
+                       end: Position { line: 11, column: 12, offset: 111 } },
+                    shortForm: false,
+                    expressions:
+                     [ Variable {
+                         kind: 'variable',
+                         loc:
+                          Location {
+                            source: null,
+                            start: Position { line: 11, column: 9, offset: 108 },
+                            end: Position { line: 11, column: 11, offset: 110 } },
+                         name: 'i',
+                         curly: false } ] } ] } },
+          ExpressionStatement {
+            kind: 'expressionstatement',
+            loc:
+             Location {
+               source: null,
+               start: Position { line: 14, column: 0, offset: 115 },
+               end: Position { line: 14, column: 7, offset: 122 } },
+            expression:
+             Assign {
+               kind: 'assign',
+               loc:
+                Location {
+                  source: null,
+                  start: Position { line: 14, column: 0, offset: 115 },
+                  end: Position { line: 14, column: 7, offset: 122 },
+                  last: Position { line: 14, column: 6, offset: 121 } },
+               operator:
+                { startLoc: Position { line: 14, column: 3, offset: 118 },
+                  sign: '=' },
+               left:
+                Variable {
+                  kind: 'variable',
+                  loc:
+                   Location {
+                     source: null,
+                     start: Position { line: 14, column: 0, offset: 115 },
+                     end: Position { line: 14, column: 2, offset: 117 } },
+                  name: 'b',
+                  curly: false },
+               right:
+                Number {
+                  kind: 'number',
+                  loc:
+                   Location {
+                     source: null,
+                     start: Position { line: 14, column: 5, offset: 120 },
+                     end: Position { line: 14, column: 6, offset: 121 } },
+                  value: '3' } } } ],
+       closed: false,
+       errors: null } ],
+  errors: [],
+  tokens:
+   [ [ 'T_OPEN_TAG', '<?php ', 1, 0, 6 ],
+     [ 'T_WHITESPACE', '\n', 1, 6, 7 ],
+     [ null, '{', 2, 7, 8 ],
+     [ 'T_WHITESPACE', '\n    ', 2, 8, 13 ],
+     [ 'T_VARIABLE', '$a', 3, 13, 15 ],
+     [ 'T_WHITESPACE', ' ', 3, 15, 16 ],
+     [ null, '=', 3, 16, 17 ],
+     [ 'T_WHITESPACE', ' ', 3, 17, 18 ],
+     [ 'T_LNUMBER', '2', 3, 18, 19 ],
+     [ null, ';', 3, 19, 20 ],
+     [ 'T_WHITESPACE', '\n', 3, 20, 21 ],
+     [ null, '}', 4, 21, 22 ],
+     [ 'T_WHITESPACE', '\n', 4, 22, 23 ],
+     [ 'T_CLOSE_TAG', '?>', 5, 23, 25 ],
+     [ 'T_INLINE_HTML', '  <div></div>', 5, 25, 38 ],
+     [ 'T_OPEN_TAG', '<?php ', 5, 38, 44 ],
+     [ 'T_VARIABLE', '$a', 5, 44, 46 ],
+     [ 'T_WHITESPACE', ' ', 5, 46, 47 ],
+     [ null, '=', 5, 47, 48 ],
+     [ 'T_WHITESPACE', ' ', 5, 48, 49 ],
+     [ 'T_LNUMBER', '3', 5, 49, 50 ],
+     [ null, ';', 5, 50, 51 ],
+     [ 'T_WHITESPACE', ' ', 5, 51, 52 ],
+     [ 'T_CLOSE_TAG', '?>', 5, 52, 54 ],
+     [ 'T_INLINE_HTML', ' \n\n', 5, 54, 57 ],
+     [ 'T_OPEN_TAG', '<?php ', 7, 57, 63 ],
+     [ 'T_WHITESPACE', '\n', 7, 63, 64 ],
+     [ 'T_FOR', 'for', 8, 64, 67 ],
+     [ 'T_WHITESPACE', ' ', 8, 67, 68 ],
+     [ null, '(', 8, 68, 69 ],
+     [ 'T_WHITESPACE', '\n    ', 8, 69, 74 ],
+     [ 'T_VARIABLE', '$i', 9, 74, 76 ],
+     [ 'T_WHITESPACE', ' ', 9, 76, 77 ],
+     [ null, '=', 9, 77, 78 ],
+     [ 'T_WHITESPACE', ' ', 9, 78, 79 ],
+     [ 'T_LNUMBER', '2', 9, 79, 80 ],
+     [ null, ';', 9, 80, 81 ],
+     [ 'T_WHITESPACE', ' ', 9, 81, 82 ],
+     [ 'T_VARIABLE', '$i', 9, 82, 84 ],
+     [ 'T_WHITESPACE', ' ', 9, 84, 85 ],
+     [ null, '<', 9, 85, 86 ],
+     [ 'T_WHITESPACE', ' ', 9, 86, 87 ],
+     [ 'T_LNUMBER', '3', 9, 87, 88 ],
+     [ null, ';', 9, 88, 89 ],
+     [ 'T_WHITESPACE', ' ', 9, 89, 90 ],
+     [ 'T_VARIABLE', '$i', 9, 90, 92 ],
+     [ 'T_INC', '++', 9, 92, 94 ],
+     [ 'T_WHITESPACE', '\n', 9, 94, 95 ],
+     [ null, ')', 10, 95, 96 ],
+     [ 'T_WHITESPACE', ' ', 10, 96, 97 ],
+     [ null, '{', 10, 97, 98 ],
+     [ 'T_WHITESPACE', '\n    ', 10, 98, 103 ],
+     [ 'T_ECHO', 'echo', 11, 103, 107 ],
+     [ 'T_WHITESPACE', ' ', 11, 107, 108 ],
+     [ 'T_VARIABLE', '$i', 11, 108, 110 ],
+     [ null, ';', 11, 110, 111 ],
+     [ 'T_WHITESPACE', '\n', 11, 111, 112 ],
+     [ null, '}', 12, 112, 113 ],
+     [ 'T_WHITESPACE', '\n\n', 12, 113, 115 ],
+     [ 'T_VARIABLE', '$b', 14, 115, 117 ],
+     [ 'T_WHITESPACE', ' ', 14, 117, 118 ],
+     [ null, '=', 14, 118, 119 ],
+     [ 'T_WHITESPACE', ' ', 14, 119, 120 ],
+     [ 'T_LNUMBER', '3', 14, 120, 121 ],
+     [ null, ';', 14, 121, 122 ] ] }
