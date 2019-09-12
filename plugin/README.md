@@ -106,6 +106,44 @@ const Position = function(line, column, offset) {
 };
 ```
 
+## Add 'PHP open tag' AST node
+
+The original php-parser has intentionally ignore the `<?php` and `?>` since it is no use for a AST. But this way is not good for us to extract the tags' positions. So I added the `phpopentag` AST node in the php-parser for their accurate positions.
+
+The `phpopentag` is just a normal AST node inherited from `Block` type AST node.
+
+The only potential unsafe modification on the source code is in `parser.js/lex()`:
+```javascript
+parser.prototype.lex = function() {
+  // append on token stack
+  if (this.extractTokens) {
+    do {
+      // ...
+      if (this.token === this.tok.T_CLOSE_TAG) {
+        // https://github.com/php/php-src/blob/7ff186434e82ee7be7c59d0db9a976641cf7b09c/Zend/zend_compile.c#L1680
+        // this.token = ";";
+        return this;
+      } else if (this.token === this.tok.T_OPEN_TAG_WITH_ECHO) {
+        this.token = this.tok.T_ECHO;
+        return this;
+      }
+    } while (
+      this.token === this.tok.T_WHITESPACE || // ignore white space
+      (!this.extractDoc &&
+        (this.token === this.tok.T_COMMENT || // ignore single lines comments
+          this.token === this.tok.T_DOC_COMMENT)) // ignore doc comments
+      // ignore open tags
+      // || this.token === this.tok.T_OPEN_TAG
+    );
+  } else {
+    this.token = this.lexer.lex() || this.EOF;    // lexer.lex() return next match that has a token
+  }
+  return this;
+};
+```
+I commented the `this.token = ";"` which seems like an important line from official Zend PHP compiler. But right now it is neccessary since we need the PHP close tag's position.
+
+
 ## Add operator location in AST
 
 Need to modify source codes of `php-parser` to show position of each operator.

@@ -1,6 +1,6 @@
 # Development Instruction
 
-A general guidence for developing plugins based on this php-parser.
+A general guidence for the work flow of this php-parser.
 
 ## Structure
 
