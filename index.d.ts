@@ -187,7 +187,7 @@ declare module "php-parser" {
   /**
    *
    */
-  export interface Node {
+  interface Node {
     [x: string]: any;
     kind: String;
     loc: Location;
@@ -289,7 +289,7 @@ declare module "php-parser" {
   }
 
 
-  export interface AST {
+  interface AST {
     [x: string]: any;
     /**
      *
