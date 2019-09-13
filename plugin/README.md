@@ -1,5 +1,7 @@
 # php-unparser
 
+**🚚 This repository has already been migrated to [tharzen/php-parser](https://github.com/tharzen/php-parser) permanently.**
+
 This is a PHP AST unparser written by JavaScript based on [glayzzle/php-parser](https://github.com/glayzzle/php-parser).
 
 It aims to restore PHP code that uses the **original code style format** from AST. We do it by restoring the white spaces between every token.
